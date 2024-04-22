@@ -17,11 +17,14 @@ class CustomerController extends Controller
     {
         // First get the customer
         $customer = Customer::findorFail($id);
-        // Then get the sum of customer quantity ordered
+        // Get the sum of customer quantity ordered
         $totalQuantity = $customer->orders()->sum('quantity');
+        // Get the total number of orders
+        $totalOrders = $customer->orders()->count();
 
         return view('total', [
             'totalQuantity' => $totalQuantity,
+            'totalOrders' => $totalOrders,
             'customer' => $customer
         ]);
     }
