@@ -10,3 +10,5 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index']);
 
 Route::get('/customers', [CustomerController::class, 'index']);
+
+Route::get('/customers/{id}/total', [CustomerController::class, 'totalQuantity'])->name('customers.totalQuantity');

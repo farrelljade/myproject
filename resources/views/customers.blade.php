@@ -26,7 +26,9 @@
               <tr class="bg-gray-100 border-b">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $customer->id }}</td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  {{ $customer->name }}
+                  <a href="{{ route('customers.totalQuantity', ['id' => $customer->id]) }}">
+                    {{ $customer->name }}
+                  </a>
                 </td>
             </tbody>
             @endforeach

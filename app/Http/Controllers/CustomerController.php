@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Customer;
 use illuminate\View\View;
 
@@ -12,5 +11,18 @@ class CustomerController extends Controller
     {
         $customers = Customer::all();
         return view('customers', compact('customers'));
+    }
+
+    public function totalQuantity($id): View
+    {
+        // First get the customer
+        $customer = Customer::findorFail($id);
+        // Then get the sum of customer quantity ordered
+        $totalQuantity = $customer->orders()->sum('quantity');
+
+        return view('total', [
+            'totalQuantity' => $totalQuantity,
+            'customer' => $customer
+        ]);
     }
 }
