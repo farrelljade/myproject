@@ -1,24 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Customer;
-use App\Models\Order;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 
-Route::get('/', function () {
-    return view('home', [
-        'customers' => Customer::all(),
-        'orders' => Order::all()
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/orders', function () {
-    return view('orders', [
-        'orders' => Order::all()
-    ]);
-});
+Route::get('/orders', [OrderController::class, 'index']);
 
-Route::get('/customers', function () {
-    return view('customers', [
-        'customers' => Customer::all()
-    ]);
-});
+Route::get('/customers', [CustomerController::class, 'index']);
