@@ -13,7 +13,9 @@ class Order extends Model
     protected $fillable = [
         'customer_id',
         'product_name',
-        'quantity'
+        'quantity',
+        'ppl',
+        'total_cost'
     ];
 
     public function customer(): BelongsTo

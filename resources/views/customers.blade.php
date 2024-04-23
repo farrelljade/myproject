@@ -16,6 +16,9 @@
                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                     Name
                   </th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    Contact Number
+                  </th>
                 </tr>
               </thead>
 
@@ -27,6 +30,9 @@
                     <a href="{{ route('customers.totalQuantity', ['id' => $customer->id]) }}">
                       {{ $customer->name }}
                     </a>
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    {{ $customer->number }}
                   </td>
               </tbody>
               @endforeach

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Customer::class);
             $table->string('product_name');
             $table->string('quantity');
+            $table->string('ppl');
+            $table->string('total_cost');
             $table->timestamps();
         });
     }
