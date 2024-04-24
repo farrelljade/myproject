@@ -11,9 +11,6 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('home', [
-            'customers' => Customer::with('orders')->get(),
-            'orders' => Order::all()
-        ]);
+        return view('home');
     }
 }

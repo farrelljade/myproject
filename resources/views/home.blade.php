@@ -1,7 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        New Customer
+        Home Page
     </x-slot:heading>
 
-    Welcome
 </x-layout>
