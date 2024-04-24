@@ -23,8 +23,8 @@ class CustomerController extends Controller
         $totalOrders = $customer->orders()->count();
 
         return view('total', [
-            'totalQuantity' => $totalQuantity,
-            'totalOrders' => $totalOrders,
+            'total_quantity' => $totalQuantity,
+            'total_orders' => $totalOrders,
             'customer' => $customer
         ]);
     }
