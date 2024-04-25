@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 use illuminate\View\View;
 
 class CustomerController extends Controller
 {
     public function index(): View
     {
-        $customers = Customer::all();
-        return view('customers', compact('customers'));
+        $customers = DB::table('customers')->paginate();
+        return view('customers', [
+            'customers' => $customers
+        ]);
     }
 
     public function totalQuantity($id): View

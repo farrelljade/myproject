@@ -41,5 +41,7 @@
         </div>
       </div>
     </div>
+      
+    {{ $customers->links() }}  
 
 </x-layout>

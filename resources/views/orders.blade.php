@@ -60,4 +60,6 @@
         </div>
       </div>
     </div>
+
+    {{ $orders->links() }}
 </x-layout>
