@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use illuminate\View\View;
@@ -26,8 +25,8 @@ class CustomerController extends Controller
         $totalOrders = $customer->orders()->count();
 
         return view('total', [
-            'total_quantity' => $totalQuantity,
-            'total_orders' => $totalOrders,
+            'totalQuantity' => $totalQuantity,
+            'totalOrders' => $totalOrders,
             'customer' => $customer
         ]);
     }

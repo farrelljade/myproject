@@ -21,7 +21,7 @@
                                 <a href="/" class="{{ request()->is('/') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
                                 <a href="/customers" class="{{ request()->is('customers') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Customers</a>
                                 <a href="/orders" class="{{ request()->is('orders') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Orders</a>
-                                <a href="/customer_registration" class="{{ request()->is('customer_registration') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Add Customer</a>
+                                <a href="/new-customer" class="{{ request()->is('new-customer') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Customer</a>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <a href="/" class="{{ request()->is('/') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
                     <a href="/customers" class="{{ request()->is('customers') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Customers</a>
                     <a href="/orders" class="{{ request()->is('orders') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Orders</a>
-                    <a href="/customer_registration" class="{{ request()->is('customer_registration') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Add Customer</a>
+                    <a href="/new-customer" class="{{ request()->is('new-customer') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Add Customer</a>
                 </div>
         </nav>
     
