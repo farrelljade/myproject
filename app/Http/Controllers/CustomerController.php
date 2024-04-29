@@ -1,30 +1,47 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\NewCustomerRequest;
 use App\Models\Customer;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 use illuminate\View\View;
 
 class CustomerController extends Controller
 {
+    // Function Showing customers. Paginated 15 per page.
     public function index(): View
     {
-        $customers = DB::table('customers')->paginate();
-        return view('customers', [
+        $customers = Customer::paginate();
+        return view('customers.index', [
             'customers' => $customers
         ]);
     }
 
-    public function totalQuantity($id): View
+    // New customer form
+    public function create()
     {
-        // First get the customer
-        $customer = Customer::findorFail($id);
-        // Get the sum of customer quantity ordered
+        return view('customers.create');
+    }
+
+    // Function to handle form data and save to database
+    public function store(NewCustomerRequest $request): RedirectResponse
+    {
+        // First check if required info is valid
+        $validated = $request->validated();
+        // Then create a new Customer and add to our Customer database
+        Customer::create($validated);
+        // Redirect back to customer_registration page
+        return redirect()->back()->with('success', 'Customer created successfully!');
+    }
+
+    // Function to get customers total orders and quantity
+    public function show(Customer $customer): View
+    {
         $totalQuantity = $customer->orders()->sum('quantity');
-        // Get the total number of orders
         $totalOrders = $customer->orders()->count();
 
-        return view('total', [
+        return view('customers.show', [
             'totalQuantity' => $totalQuantity,
             'totalOrders' => $totalOrders,
             'customer' => $customer

@@ -7,7 +7,7 @@ use App\Http\Requests\NewCustomerRequest;
 
 class NewCustomerController extends Controller
 {
-    public function index()
+    public function create()
     {
         return view('new-customer');
     }
