@@ -14,7 +14,7 @@ class NewCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required|max:100'],
+            'name' => ['required'],
             'address' => ['required'],
             'number' => ['required'],
             'email' => ['required']

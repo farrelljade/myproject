@@ -12,7 +12,8 @@ class CustomerController extends Controller
     // Function Showing customers. Paginated 15 per page.
     public function index(): View
     {
-        $customers = Customer::paginate();
+        // $customers = Customer::orderBy('created_at', 'desc')->paginate();
+        $customers = Customer::latest()->paginate();
         return view('customers.index', [
             'customers' => $customers
         ]);
@@ -23,13 +24,13 @@ class CustomerController extends Controller
     {
         return view('customers.create');
     }
-
+    
     // Function to handle form data and save to database
     public function store(NewCustomerRequest $request): RedirectResponse
     {
         // First check if required info is valid
         $validated = $request->validated();
-        // Then create a new Customer and add to our Customer database
+        // Then create a new Customer and add to the Customer database
         Customer::create($validated);
         // Redirect back to customer_registration page
         return redirect()->back()->with('success', 'Customer created successfully!');

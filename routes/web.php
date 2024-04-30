@@ -7,4 +7,4 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('customers', CustomerController::class);
-Route::get('/orders', [OrderController::class, 'index']);
+Route::resource('orders', OrderController::class);

@@ -17,7 +17,7 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        $productName = fake()->randomElement(['DERV', 'IHO', 'Kerosene', 'Gas Oil', 'AdBlue']);
+        $products = fake()->randomElement(['DERV', 'IHO', 'Kerosene', 'Gas Oil', 'AdBlue']);
         $quantity = fake()->numberBetween(500, 20000);
 
         // Pricing rules
@@ -29,10 +29,10 @@ class OrderFactory extends Factory
             'AdBlue' => ['threshold' => 10000, 'low' => 0.30, 'high' => 0.25]
         ];
 
-        if (isset($pricing[$productName])) {
-            $ppl = $quantity < $pricing[$productName]['threshold'] ?
-                   $pricing[$productName]['low'] :
-                   $pricing[$productName]['high'];
+        if (isset($pricing[$products])) {
+            $ppl = $quantity < $pricing[$products]['threshold'] ?
+                   $pricing[$products]['low'] :
+                   $pricing[$products]['high'];
         }
 
         $totalCost = $quantity * $ppl;
@@ -40,7 +40,7 @@ class OrderFactory extends Factory
         return [
             // inRandomOrder to get a random customer ID
             'customer_id' => Customer::inRandomOrder()->first()->id,
-            'product_name' => $productName,
+            'product_name' => $products,
             'quantity' => $quantity,
             // number_format to get 2 decimal places
             'ppl' => number_format($ppl, 2, '.', ''),
