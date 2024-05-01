@@ -11,30 +11,39 @@
           <div class="sm:col-span-3">
             <label for="customer_id" class="block text-sm font-medium leading-6 text-gray-900">Company name</label>
             <div class="mt-2">
-              <select name="customer_id" id="customer_id" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
+              <select name="customer_id" id="customer_id" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 <option value="">Select a Customer</option>
                 @foreach ($customers as $customer)
                   <option value="{{ $customer->id }}">{{ $customer->name }}</option>                    
                 @endforeach
               </select>
             </div>
+            @error('customer_id')
+              <div class="text-red-700 px-1.5 py-1.5">select a customer</div>  
+            @enderror
           </div>
           <div class="sm:col-span-3">
             <label for="product_name" class="block text-sm font-medium leading-6 text-gray-900">Product</label>
             <div class="mt-2">
-              <select name="product_name" id="product_name" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
+              <select name="product_name" id="product_name" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 <option value="">Select a Product</option>
                 @foreach ($products as $product)
                   <option value="{{ $product }}">{{ $product }}</option>
                 @endforeach
               </select>
             </div>
+            @error('product_name')
+              <div class="text-red-700 px-1.5 py-1.5">select a product</div>  
+            @enderror
           </div>
           <div class="sm:col-span-3">
             <label for="quantity" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
             <div class="mt-2">
               <input type="text" name="quantity" id="quantity" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
+            @error('quantity')
+              <div class="text-red-700 px-1.5 py-1.5">quantity amount</div>  
+            @enderror
           </div>
           <div class="sm:col-span-3">
             <label for="ppl" class="block text-sm font-medium leading-6 text-gray-900">PPL</label>
@@ -57,14 +66,14 @@
     </div>
   </form>
   @if (session()->has('success'))
-  <p>
+  <p class="text-green-700">
       {{ session()->get('success'); }}
   </p>
   @endif
     
 </x-layout>
 
-{{-- Add JavaScript to dynamically up date the PPL and Total Costs in real time --}}
+{{-- Add JavaScript to dynamically update the PPL and Total Costs in real time --}}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
       const productSelect = document.getElementById('product_name');
