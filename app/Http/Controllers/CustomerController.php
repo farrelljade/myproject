@@ -41,11 +41,12 @@ class CustomerController extends Controller
     {
         $totalQuantity = $customer->orders()->sum('quantity');
         $totalOrders = $customer->orders()->count();
-
+        $allOrders = $customer->orders()->latest()->get();
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,
             'totalOrders' => $totalOrders,
-            'customer' => $customer
+            'customer' => $customer,
+            'allOrders' => $allOrders
         ]);
     }
 }

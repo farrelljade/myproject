@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('quantity');
             $table->string('ppl');
+            $table->string('nett_cost');
+            $table->string('vat');
             $table->string('total_cost');
             $table->timestamps();
         });

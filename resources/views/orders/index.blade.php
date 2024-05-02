@@ -3,6 +3,19 @@
         Orders Page
     </x-slot:heading>
 
+    <form action="{{ route('orders.index') }}" method="get">
+      <select name="product_name">
+        <option value="">Select Product</option>
+        <option value="DERV">DERV</option>
+        <option value="IHO">IHO</option>
+        <option value="Kerosene">Kerosene</option>
+        <option value="Gas Oil">Gas Oil</option>
+        <option value="AdBlue">AdBlue</option>
+      </select>
+      <input type="number" name="quantity" placeholder="Enter min quantity">
+      <button type="submit">Apply Filters</button>
+    </form>
+
     <div class="flex flex-col">
       <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">

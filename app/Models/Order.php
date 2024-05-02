@@ -15,6 +15,8 @@ class Order extends Model
         'product_name',
         'quantity',
         'ppl',
+        'nett_cost',
+        'vat',
         'total_cost'
     ];
 

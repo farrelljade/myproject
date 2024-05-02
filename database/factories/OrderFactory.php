@@ -35,7 +35,9 @@ class OrderFactory extends Factory
                    $pricing[$products]['high'];
         }
 
-        $totalCost = $quantity * $ppl;
+        $nettCost = $quantity * $ppl;
+        $vat = $nettCost / 100 * 20;
+        $totalCost = $nettCost + $vat;
 
         return [
             // inRandomOrder to get a random customer ID
@@ -44,6 +46,8 @@ class OrderFactory extends Factory
             'quantity' => $quantity,
             // number_format to get 2 decimal places
             'ppl' => number_format($ppl, 2, '.', ''),
+            'nett_cost' => number_format($nettCost, 2, '.', ''),
+            'vat' => number_format($vat, 2, '.', ''),
             'total_cost' => number_format($totalCost, 2, '.', '')
         ];
     }

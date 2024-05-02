@@ -19,7 +19,7 @@
               </select>
             </div>
             @error('customer_id')
-              <div class="text-red-700 px-1.5 py-1.5">select a customer</div>  
+              <div class="text-xs text-red-600 font-semibold mt-1">Customer field is required</div>  
             @enderror
           </div>
           <div class="sm:col-span-3">
@@ -33,7 +33,7 @@
               </select>
             </div>
             @error('product_name')
-              <div class="text-red-700 px-1.5 py-1.5">select a product</div>  
+              <div class="text-xs text-red-600 font-semibold mt-1">Product field is required</div>  
             @enderror
           </div>
           <div class="sm:col-span-3">
@@ -42,7 +42,7 @@
               <input type="text" name="quantity" id="quantity" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
             @error('quantity')
-              <div class="text-red-700 px-1.5 py-1.5">quantity amount</div>  
+              <div class="text-xs text-red-600 font-semibold mt-1">quantity is required</div>  
             @enderror
           </div>
           <div class="sm:col-span-3">
@@ -52,7 +52,19 @@
             </div>
           </div>     
           <div class="sm:col-span-3">
-            <label for="total_cost" class="block text-sm font-medium leading-6 text-gray-900">Total cost</label>
+            <label for="nett_cost" class="block text-sm font-medium leading-6 text-gray-900">Nett</label>
+            <div class="mt-2">
+              <input type="text" name="nett_cost" id="nett_cost" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>     
+          <div class="sm:col-span-3">
+            <label for="vat" class="block text-sm font-medium leading-6 text-gray-900">VAT</label>
+            <div class="mt-2">
+              <input type="text" name="vat" id="vat" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>     
+          <div class="sm:col-span-3">
+            <label for="total_cost" class="block text-sm font-medium leading-6 text-gray-900">Total</label>
             <div class="mt-2">
               <input type="text" name="total_cost" id="total_cost" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
@@ -79,6 +91,8 @@
       const productSelect = document.getElementById('product_name');
       const quantityInput = document.getElementById('quantity');
       const pplInput = document.getElementById('ppl');
+      const nettCostInput = document.getElementById('nett_cost');
+      const vatInput = document.getElementById('vat');
       const totalCostInput = document.getElementById('total_cost');
   
       const pricing = {
@@ -96,9 +110,14 @@
               const productPricing = pricing[selectedProduct];
               const ppl = quantity < productPricing.threshold ? productPricing.low : productPricing.high;
               pplInput.value = ppl.toFixed(2);
-              totalCostInput.value = (quantity * ppl).toFixed(2);
+              const nettCost = nettCostInput.value = (quantity * ppl).toFixed(2);
+              const vat = nettCost / 100 * 20; 
+              vatInput.value = (nettCost / 100 * 20).toFixed(2);
+              totalCostInput.value = (parseFloat(nettCost) + parseFloat(vatInput.value)).toFixed(2);
           } else {
               pplInput.value = '';
+              nettCostInput.value = '';
+              vatInput.value = '';
               totalCostInput.value = '';
           }
       }
