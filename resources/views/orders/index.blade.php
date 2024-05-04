@@ -61,6 +61,7 @@
                 </th>
               </tr>
             </thead>
+            
             <tbody class="bg-white divide-y divide-gray-200">
               @foreach ($orders as $order)
               <tr>

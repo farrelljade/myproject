@@ -3,45 +3,38 @@
         Customers Page
     </x-slot:heading>
           
-    <div class="flex flex-col">
-      <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
-            <table class="min-w-full">
-              <thead class="bg-white border-b">
-                <tr>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    #
-                  </th>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    Name
-                  </th>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    Contact Number
-                  </th>
-                </tr>
-              </thead>
+    <div class="flex flex-col mt-8">
+      <div class="overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="inline-block min-w-full align-middle">        
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Name
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Contact Number
+                </th>
+              </tr>
+            </thead>
 
+            <tbody class="bg-white divide-y divide-gray-200">
               @foreach ($customers as $customer)
-              <tbody>
-                <tr class="bg-gray-100 border-b">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $customer->id }}</td>
-                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    <a href="{{ route('customers.show', $customer) }}">
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <a href="{{ route('customers.show', $customer) }}" class="text-gray-600 hover:text-gray-900">
                       {{ $customer->name }}
                     </a>
                   </td>
-                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {{ $customer->number }}
                   </td>
-              </tbody>
+                </tr>
               @endforeach
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
-      
-    {{ $customers->links() }}  
-
+    </div>  
+    {{ $customers->links() }}
 </x-layout>
