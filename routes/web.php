@@ -8,3 +8,6 @@ use App\Http\Controllers\OrderController;
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('customers', CustomerController::class);
 Route::resource('orders', OrderController::class);
+
+// Route for customer search autocomplete.
+Route::get('api/customers/search', [OrderController::class, 'searchCustomers']);

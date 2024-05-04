@@ -9,9 +9,9 @@
       <div class="border-b border-gray-900/10 pb-12">
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div class="sm:col-span-3">
-            <label for="customer_id" class="block text-sm font-medium leading-6 text-gray-900">Company name</label>
+            <label for="customer_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company name</label>
             <div class="mt-2">
-              <select name="customer_id" id="customer_id" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <select name="customer_id" id="customer_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option value="">Select a Customer</option>
                 @foreach ($customers as $customer)
                   <option value="{{ $customer->id }}">{{ $customer->name }}</option>                    
@@ -23,9 +23,9 @@
             @enderror
           </div>
           <div class="sm:col-span-3">
-            <label for="product_name" class="block text-sm font-medium leading-6 text-gray-900">Product</label>
+            <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product</label>
             <div class="mt-2">
-              <select name="product_name" id="product_name" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <select name="product_name" id="product_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option value="">Select a Product</option>
                 @foreach ($products as $product)
                   <option value="{{ $product }}">{{ $product }}</option>
@@ -37,44 +37,44 @@
             @enderror
           </div>
           <div class="sm:col-span-3">
-            <label for="quantity" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
+            <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Quantity</label>
             <div class="mt-2">
-              <input type="text" name="quantity" id="quantity" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
             </div>
             @error('quantity')
-              <div class="text-xs text-red-600 font-semibold mt-1">quantity is required</div>  
+              <div class="text-xs text-red-600 font-semibold mt-1">Quantity is required</div>  
             @enderror
           </div>
           <div class="sm:col-span-3">
-            <label for="ppl" class="block text-sm font-medium leading-6 text-gray-900">PPL</label>
+            <label for="ppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">PPL</label>
             <div class="mt-2">
-              <input type="text" name="ppl" id="ppl" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="ppl" id="ppl" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             </div>
           </div>     
           <div class="sm:col-span-3">
-            <label for="nett_cost" class="block text-sm font-medium leading-6 text-gray-900">Nett</label>
+            <label for="nett_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nett</label>
             <div class="mt-2">
-              <input type="text" name="nett_cost" id="nett_cost" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="nett_cost" id="nett_cost" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             </div>
           </div>     
           <div class="sm:col-span-3">
-            <label for="vat" class="block text-sm font-medium leading-6 text-gray-900">VAT</label>
+            <label for="vat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">VAT</label>
             <div class="mt-2">
-              <input type="text" name="vat" id="vat" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="vat" id="vat" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             </div>
           </div>     
           <div class="sm:col-span-3">
-            <label for="total_cost" class="block text-sm font-medium leading-6 text-gray-900">Total</label>
+            <label for="total_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total</label>
             <div class="mt-2">
-              <input type="text" name="total_cost" id="total_cost" readonly class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="total_cost" id="total_cost" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             </div>
           </div>     
         </div>
       </div>
     </div>
     <div class="mt-6 flex items-center justify-end gap-x-6">
-      <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-      <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+      <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cancel</button>
+      <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create order</button>
     </div>
   </form>
   @if (session()->has('success'))

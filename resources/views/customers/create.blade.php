@@ -5,51 +5,43 @@
 
   <form action="{{ route('customers.store') }}" method="post">
     @csrf
-    <div class="space-y-12">
-      <div class="border-b border-gray-900/10 pb-12">
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Company name</label>
-            <div class="mt-2">
-              <input type="text" name="name" id="name" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-            @error('name')
-              <div class="text-xs text-red-600 font-semibold mt-1">Company name required</div>  
-            @enderror
-          </div>
-          <div class="sm:col-span-4">
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-            <div class="mt-2">
-              <input id="email" name="email" type="email" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-            @error('email')
-              <div class="text-xs text-red-600 font-semibold mt-1">Email address required</div>  
-            @enderror
-          </div>
-          <div class="col-span-full">
-            <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Invoice address</label>
-            <div class="mt-2">
-              <input type="text" name="address" id="address" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Start typing and select your address">
-            </div>
-            @error('address')
-              <div class="text-xs text-red-600 font-semibold mt-1">Invoice address required</div>  
-            @enderror
-          </div>
-          <div class="sm:col-span-2">
-            <label for="number" class="block text-sm font-medium leading-6 text-gray-900">Contact number</label>
-            <div class="mt-2">
-              <input type="text" name="number" id="number" class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-            @error('number')
-              <div class="text-xs text-red-600 font-semibold mt-1">Contact number required</div> 
-            @enderror
-          </div>     
-        </div>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">    
+      <div>
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company name</label>
+        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        @error('name')
+          <div class="text-xs text-red-600 font-semibold mt-1">Company name required</div>  
+        @enderror
       </div>
+
+      <div>
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>  
+        <input id="email" name="email" type="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        @error('email')
+          <div class="text-xs text-red-600 font-semibold mt-1">Email address required</div>  
+        @enderror
+      </div>
+
+      <div class="col-span-full">
+        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Invoice address</label>  
+        <input type="text" name="address" id="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Start typing and select your address">
+        @error('address')
+          <div class="text-xs text-red-600 font-semibold mt-1">Invoice address required</div>  
+        @enderror
+      </div>
+
+      <div>
+        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Contact number</label>  
+        <input type="text" name="number" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        @error('number')
+          <div class="text-xs text-red-600 font-semibold mt-1">Contact number required</div> 
+        @enderror
+      </div>     
     </div>
+    
     <div class="mt-6 flex items-center justify-end gap-x-6">
-      <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-      <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+      <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cancel</button>
+      <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
     </div>
   </form>
 

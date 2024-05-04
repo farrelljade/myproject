@@ -12,30 +12,40 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    private function filterQuantity(Request $request)
+    public function searchCustomers(Request $request)
     {
-        $productName = $request->input('product_name');
-        $quantity = $request->input('quantity');
-        // Start query
-        $query = Order::query();
-        // Apply user provided filters
-        if ($productName) {
-            $query->where('product_name', $productName);
-        }
-        if ($quantity) {
-            $query->where('quantity', '>=', $quantity);
-        }
-        return $query->latest()->paginate();
+        $search = $request->get('term');
+        $customer = Customer::where('name', 'LIKE', '%'. $search. '%')->get(['id', 'name as value']);
+        return response()->json($customer);
     }
 
     public function index(Request $request): View
-    {
-        $orders = $this->filterQuantity($request);
-        return view('orders.index', [
-            'orders' => $orders
-        ]);
+{
+    $query = Order::query();
+
+    // Filter by product name
+    if ($productName = $request->input('product_name')) {
+        $query->where('product_name', $productName);
     }
-    
+
+    // Filter by quantity
+    if ($quantityAmount = $request->input('quantity')) {
+        $query->where('quantity', '>=', $quantityAmount);
+    }
+
+    // Filter by customer
+    if ($customerId = $request->input('customer_id')) {
+        $query->where('customer_id', $customerId);
+    }
+
+    // Get the latest orders after applying all filters
+    $orders = $query->latest()->paginate(10);
+
+    return view('orders.index', [
+        'orders' => $orders,
+    ]);
+}
+
     public function create(): View
     {
         $customers = Customer::orderBy('name', 'asc')->get();

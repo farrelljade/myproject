@@ -17,11 +17,11 @@ return new class extends Migration
             // foreign id key for company
             $table->foreignIdFor(Customer::class);
             $table->string('product_name');
-            $table->string('quantity');
-            $table->string('ppl');
-            $table->string('nett_cost');
-            $table->string('vat');
-            $table->string('total_cost');
+            $table->integer('quantity');
+            $table->decimal('ppl', 8, 2);
+            $table->decimal('nett_cost', 8, 2);
+            $table->decimal('vat', 8, 2);
+            $table->decimal('total_cost', 8, 2);
             $table->timestamps();
         });
     }

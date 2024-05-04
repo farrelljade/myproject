@@ -15,12 +15,12 @@ class NewOrderRequest extends FormRequest
     {
         return [
             'customer_id' => ['required', 'string', 'max:255'],
-            'product_name' => ['required'],
-            'quantity' => ['required'],
-            'ppl' => ['required'],
-            'nett_cost' => ['required'],
-            'vat' => ['required'],
-            'total_cost' => ['required']
+            'product_name' => ['required', 'string', 'max:255'],
+            'quantity' => ['required', 'numeric'],
+            'ppl' => ['required', 'numeric'],
+            'nett_cost' => ['required', 'numeric'],
+            'vat' => ['required', 'numeric'],
+            'total_cost' => ['required', 'numeric']
         ];
     }
 }
