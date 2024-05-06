@@ -28,6 +28,11 @@ class OrderController extends Controller
         $query->where('product_name', $productName);
     }
 
+    // Filter by order id
+    if ($orderId = $request->input('order_id')) {
+        $query->where('id', $orderId);
+    }
+
     // Filter by quantity
     if ($quantityAmount = $request->input('quantity')) {
         $query->where('quantity', '>=', $quantityAmount);

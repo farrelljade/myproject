@@ -1,7 +1,52 @@
 <x-layout>
     <x-slot:heading>
-        {{ $customer->name }}'s - Order History
+        {{ $customer->id }} - {{ $customer->name }}
     </x-slot:heading>
+
+    <a href="{{ route('customers.edit', $customer->id) }}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Edit details</a>
+
+    <div class="flex flex-col mt-8">
+      <div class="overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="inline-block min-w-full align-middle">          
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Company Details
+                </th>
+              </tr>
+            </thead>
+    
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  Invoice address:
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  {{ $customer->address }}
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  Contact number:
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  {{ $customer->number }}
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  Email:
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  {{ $customer->email }}
+                </td>
+              </tr>
+            </tbody>
+          </table>       
+        </div>
+      </div> 
+    </div>
 
     <div class="flex flex-col mt-8">
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -33,7 +78,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col mt-20">
+    <div class="flex flex-col mt-8">
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
         <div class="inline-block min-w-full align-middle">        
           <table class="min-w-full divide-y divide-gray-200">

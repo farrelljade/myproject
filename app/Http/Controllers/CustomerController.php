@@ -4,28 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NewCustomerRequest;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
-    // Function Showing customers. Paginated 15 per page.
     public function index(): View
     {
-        // $customers = Customer::orderBy('created_at', 'desc')->paginate();
         $customers = Customer::latest()->paginate();
         return view('customers.index', [
             'customers' => $customers
         ]);
     }
 
-    // New customer form
     public function create()
     {
-        return view('customers.create');
+        // Retrieve all users by their first name. Customers need a user assigned to create.
+        $users = User::orderBy('first_name')->get();
+
+        return view('customers.create', [
+            'users' => $users
+        ]);
     }
     
-    // Function to handle form data and save to database
     public function store(NewCustomerRequest $request): RedirectResponse
     {
         // First check if required info is valid
@@ -34,6 +38,22 @@ class CustomerController extends Controller
         Customer::create($validated);
         // Redirect back to customer_registration page
         return redirect()->back()->with('success', 'Customer created successfully!');
+    }
+
+    public function edit($id)
+    {
+        // First find customer to be able to populate form fields
+        $customer = Customer::findOrFail($id);
+
+        return view('customers.edit', compact('customer'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $customer = Customer::findorfail($id);
+        $customer->update($request->all());
+
+        return redirect()->route('customers.show', $customer->id)->with('success', 'Details successfully updated');
     }
 
     // Function to get customers total orders and quantity

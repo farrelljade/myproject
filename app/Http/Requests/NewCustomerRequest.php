@@ -14,6 +14,7 @@ class NewCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => ['required'],
             'name' => ['required'],
             'address' => ['required'],
             'number' => ['required'],

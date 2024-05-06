@@ -13,9 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
             // foreign id key for company
             $table->foreignIdFor(Customer::class);
+            $table->id();
             $table->string('product_name');
             $table->integer('quantity');
             $table->decimal('ppl', 8, 2);
