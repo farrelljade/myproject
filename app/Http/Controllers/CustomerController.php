@@ -8,15 +8,28 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    // Define table columns for the customer index view
+    private function getTableColumns()
+    {
+        $columns = [
+            ['name' => 'id', 'label' => 'Account Number', 'link' => 'customers.show'],
+            ['name' => 'name', 'label' => 'Name', 'link' => 'customers.show'],
+            ['name' => 'number', 'label' => 'Contact Number', 'link' => 'customers.show'],
+        ];
+
+        return $columns;
+    }
+
     public function index(): View
     {
+        $columns = $this->getTableColumns();
         $customers = Customer::latest()->paginate();
         return view('customers.index', [
-            'customers' => $customers
+            'customers' => $customers,
+            'columns' => $columns
         ]);
     }
 
@@ -37,7 +50,9 @@ class CustomerController extends Controller
         // Then create a new Customer and add to the Customer database
         Customer::create($validated);
         // Redirect back to customer_registration page
-        return redirect()->back()->with('success', 'Customer created successfully!');
+
+        return redirect()->back()
+                         ->with('success', 'Customer created successfully!');
     }
 
     public function edit($id)
@@ -53,7 +68,18 @@ class CustomerController extends Controller
         $customer = Customer::findorfail($id);
         $customer->update($request->all());
 
-        return redirect()->route('customers.show', $customer->id)->with('success', 'Details successfully updated');
+        return redirect()->route('customers.show', $customer->id)
+                         ->with('success', 'Details successfully updated');
+    }
+
+    // Function to softDelete customers
+    public function destroy($id)
+    {
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
+
+        return redirect()->route('customers.show')
+                         ->with('success', 'Customer details successfully removed');
     }
 
     // Function to get customers total orders and quantity
@@ -62,6 +88,7 @@ class CustomerController extends Controller
         $totalQuantity = $customer->orders()->sum('quantity');
         $totalOrders = $customer->orders()->count();
         $allOrders = $customer->orders()->latest()->get();
+        
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,
             'totalOrders' => $totalOrders,

@@ -5,6 +5,14 @@
 
     <a href="{{ route('customers.edit', $customer->id) }}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Edit details</a>
 
+    <form method="POST" action="{{ route('customers.destroy', $customer->id) }}" class="inline mx-10">
+      @csrf
+      @method('DELETE')
+      <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onclick="return confirm('Are you sure you want to delete this customer?');">Delete details
+      </button>
+  </form>
+  
+
     <div class="flex flex-col mt-8">
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
         <div class="inline-block min-w-full align-middle">          
