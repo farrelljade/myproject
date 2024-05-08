@@ -37,15 +37,6 @@ class HomeController extends Controller
                     ->groupBy('users.id', 'orders.product_name')
                     ->get();
 
-
-        // $users = DB::table('customers')
-        //             ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
-        //             ->latest()->get();
-
-        // $users = DB::table('orders')
-        //             ->rightJoin('customers', 'orders.customer_id', '=', 'customers.id')
-        //             ->latest()->get();
-
         return view('home', [
             'orders' => $orders,
             'users' => $users

@@ -57,10 +57,11 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-        // First find customer to be able to populate form fields
         $customer = Customer::findOrFail($id);
 
-        return view('customers.edit', compact('customer'));
+        return view('customers.edit', [
+            'customer' => $customer
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -72,13 +73,12 @@ class CustomerController extends Controller
                          ->with('success', 'Details successfully updated');
     }
 
-    // Function to softDelete customers
     public function destroy($id)
     {
         $customer = Customer::findOrFail($id);
         $customer->delete();
 
-        return redirect()->route('customers.show')
+        return redirect()->route('customers.index')
                          ->with('success', 'Customer details successfully removed');
     }
 
@@ -88,7 +88,7 @@ class CustomerController extends Controller
         $totalQuantity = $customer->orders()->sum('quantity');
         $totalOrders = $customer->orders()->count();
         $allOrders = $customer->orders()->latest()->get();
-        
+
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,
             'totalOrders' => $totalOrders,

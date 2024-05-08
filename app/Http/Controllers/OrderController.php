@@ -20,36 +20,40 @@ class OrderController extends Controller
     }
 
     public function index(Request $request): View
-{
-    $query = Order::query();
+    {
+        $query = Order::query();
 
-    // Filter by product name
-    if ($productName = $request->input('product_name')) {
-        $query->where('product_name', $productName);
+        // Join with customers database and filter out softDeleted customers
+        $query->join('customers', 'orders.customer_id', '=', 'customers.id')
+              ->whereNull('deleted_at');
+
+        // Filter by product name
+        if ($productName = $request->input('product_name')) {
+            $query->where('product_name', $productName);
+        }
+
+        // Filter by order id
+        if ($orderId = $request->input('order_id')) {
+            $query->where('id', $orderId);
+        }
+
+        // Filter by quantity
+        if ($quantityAmount = $request->input('quantity')) {
+            $query->where('quantity', '>=', $quantityAmount);
+        }
+
+        // Filter by customer
+        if ($customerId = $request->input('customer_id')) {
+            $query->where('customer_id', $customerId);
+        }
+
+        // Get the latest orders after applying all filters
+        $orders = $query->latest()->paginate(10);
+
+        return view('orders.index', [
+            'orders' => $orders,
+        ]);
     }
-
-    // Filter by order id
-    if ($orderId = $request->input('order_id')) {
-        $query->where('id', $orderId);
-    }
-
-    // Filter by quantity
-    if ($quantityAmount = $request->input('quantity')) {
-        $query->where('quantity', '>=', $quantityAmount);
-    }
-
-    // Filter by customer
-    if ($customerId = $request->input('customer_id')) {
-        $query->where('customer_id', $customerId);
-    }
-
-    // Get the latest orders after applying all filters
-    $orders = $query->latest()->paginate(10);
-
-    return view('orders.index', [
-        'orders' => $orders,
-    ]);
-}
 
     public function create(): View
     {
