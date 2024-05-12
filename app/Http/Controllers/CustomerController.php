@@ -15,18 +15,40 @@ class CustomerController extends Controller
     private function getTableColumns()
     {
         $columns = [
-            ['name' => 'id', 'label' => 'Account Number', 'link' => 'customers.show'],
+            ['name' => 'id', 'label' => 'Account Number'],
             ['name' => 'name', 'label' => 'Name', 'link' => 'customers.show'],
-            ['name' => 'number', 'label' => 'Contact Number', 'link' => 'customers.show'],
+            ['name' => 'number', 'label' => 'Contact Number'],
+            ['name' => 'email', 'label' => 'Email']
         ];
 
         return $columns;
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
+        $query = Customer::query();
+
+        // Filter by company name
+        if ($name = $request->input('customer_search')) {
+            $query->where('name', $name);
+        }
+
+        // Filter by email
+        if ($email = $request->input('email')) {
+            $query->where('email', $email);
+        }
+        // Filter by number
+        if ($number = $request->input('number')) {
+            $query->where('number', $number);
+        }
+
+        // Filter by account number
+        if ($accountNumber = $request->input('id')) {
+            $query->where('id', $accountNumber);
+        }
+
         $columns = $this->getTableColumns();
-        $customers = Customer::latest()->paginate();
+        $customers = $query->latest()->paginate();
         return view('customers.index', [
             'customers' => $customers,
             'columns' => $columns

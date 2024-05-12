@@ -23,32 +23,47 @@ class OrderController extends Controller
     {
         $query = Order::query();
 
+        // Explicitly select columns needed.
+        $query->select(
+            'orders.id as order_id',
+            'orders.product_name',
+            'orders.quantity',
+            'orders.ppl',
+            'orders.nett_cost',
+            'orders.vat',
+            'orders.total_cost',
+            'orders.created_at as order_created_at',
+            'customers.id as customer_id',
+            'customers.name as customer_name',
+            'customers.created_at as customer_created_at'
+        );
+
         // Join with customers database and filter out softDeleted customers
         $query->join('customers', 'orders.customer_id', '=', 'customers.id')
-              ->whereNull('deleted_at');
+            ->whereNull('customers.deleted_at');
 
         // Filter by product name
         if ($productName = $request->input('product_name')) {
-            $query->where('product_name', $productName);
+            $query->where('orders.product_name', $productName);
         }
 
         // Filter by order id
         if ($orderId = $request->input('order_id')) {
-            $query->where('id', $orderId);
+            $query->where('orders.id', $orderId);
         }
 
         // Filter by quantity
         if ($quantityAmount = $request->input('quantity')) {
-            $query->where('quantity', '>=', $quantityAmount);
+            $query->where('orders.quantity', '>=', $quantityAmount);
         }
 
-        // Filter by customer
+        // Filter by customer ID
         if ($customerId = $request->input('customer_id')) {
-            $query->where('customer_id', $customerId);
+            $query->where('customers.id', $customerId);
         }
 
         // Get the latest orders after applying all filters
-        $orders = $query->latest()->paginate(10);
+        $orders = $query->latest('orders.created_at')->paginate(10);
 
         return view('orders.index', [
             'orders' => $orders,
@@ -70,5 +85,34 @@ class OrderController extends Controller
         $validated = $request->validated();
         Order::create($validated);
         return redirect()->back()->with('success', 'Order created successfully');
+    }
+
+    public function edit($id)
+    {
+        $order = Order::findOrFail($id);
+        $products = ['DERV', 'IHO', 'Kerosene', 'Gas Oil', 'AdBlue'];
+
+        return view('orders.edit', [
+            'order' => $order,
+            'products' => $products
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+
+        return redirect()->route('orders.show', $order->id)
+                         ->with('success', 'Order successfully updated');
+    }
+
+    public function show($id): View
+    {
+        $order = Order::findOrFail($id);
+
+        return view('orders.show', [
+            'order' => $order
+        ]);
     }
 }
