@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Update Order - {{ $order->id }}
+        Update Order
     </x-slot:heading>
 
   <form action="{{ route('orders.update', $order->id) }}" method="post">
@@ -30,7 +30,7 @@
                 <div class="sm:col-span-3">
                 <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Quantity</label>
                 <div class="mt-2">
-                    <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
+                    <input type="number" name="quantity" id="quantity" value="{{ $order->quantity }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
                 </div>
                 @error('quantity')
                     <div class="text-xs text-red-600 font-semibold mt-1">Quantity is required</div>  
@@ -39,25 +39,25 @@
                 <div class="sm:col-span-3">
                 <label for="ppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">PPL</label>
                 <div class="mt-2">
-                    <input type="text" name="ppl" id="ppl" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="ppl" id="ppl" value="{{ $order->ppl }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </div>
                 </div>     
                 <div class="sm:col-span-3">
                 <label for="nett_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nett</label>
                 <div class="mt-2">
-                    <input type="text" name="nett_cost" id="nett_cost" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="nett_cost" id="nett_cost" value="{{ $order->nett_cost }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </div>
                 </div>     
                 <div class="sm:col-span-3">
                 <label for="vat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">VAT</label>
                 <div class="mt-2">
-                    <input type="text" name="vat" id="vat" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="vat" id="vat" value="{{ $order->vat }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </div>
                 </div>     
                 <div class="sm:col-span-3">
                 <label for="total_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total</label>
                 <div class="mt-2">
-                    <input type="text" name="total_cost" id="total_cost" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="total_cost" id="total_cost" value="{{ $order->total_cost }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </div>
                 </div>     
             </div>

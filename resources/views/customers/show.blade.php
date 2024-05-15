@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Account Number: {{ $customer->id }} - {{ $customer->name }}
+        {{ $customer->id }} - {{ $customer->name }}
     </x-slot:heading>
 
     <a href="{{ route('customers.edit', $customer->id) }}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Edit details</a>
@@ -11,6 +11,8 @@
         <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onclick="return confirm('Are you sure you want to delete this customer?');">Delete details
         </button>
     </form>
+
+    <a href="{{ route('orders.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">New Order</a>
 
     <div class="flex flex-row mt-8 space-x-4">
         <div class="flex-1 overflow-x-auto shadow-md sm:rounded-lg">
@@ -60,6 +62,21 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                <strong>Sales Rep:</strong> {{ $customer->user->first_name }} {{ $customer->user->last_name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                Additional Info
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                Additional Info
+                            </td>
+                        </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
                                 Additional Info

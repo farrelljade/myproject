@@ -6,7 +6,7 @@ use App\Http\Requests\NewCustomerRequest;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use illuminate\View\View;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
