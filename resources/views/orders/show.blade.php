@@ -25,11 +25,6 @@
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                Rep - {{ $order->customer->user->first_name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
                                 Special Instructions - TO BE ADDED!
                             </td>
                         </tr>
@@ -64,6 +59,11 @@
                                 PO - 12345 - LOGIC TO BE ADDED
                             </td>
                         </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                <strong>Invoice Date:</strong> LOGIC TO BE ADDED
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -79,6 +79,12 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Product Details
                             </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                
+                            </th>
                         </tr>
                     </thead>
         
@@ -87,30 +93,33 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
                                 <strong>Product:</strong> {{ $order->product_name }}
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                <strong>Quantity:</strong> {{ $order->quantity }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                <strong>Cost ppl:</strong> {{ $order->ppl }}
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Quantity:</strong> {{ $order->quantity }}
+                                <strong>Sell ppl:</strong> {{ $order->ppl_sell_at }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                <strong>Profit ppl:</strong> £{{ $order->ppl_profit }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                <strong>Total Profit:</strong> £{{ $order->profit }}
                             </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
                                 <strong>Nett Total:</strong> £{{ $order->nett_cost }}
                             </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>PPL:</strong> £{{ $order->ppl }}
-                            </td>
-                        </tr>
-                        <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
                                 <strong>VAT:</strong> £{{ $order->vat }}
                             </td>
-                        </tr>
-                        <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Total Cost:</strong> £{{ $order->total_cost }}
+                                <strong>Order Total:</strong> £{{ $order->total_cost }}
                             </td>
                         </tr>
                     </tbody>
@@ -144,12 +153,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
                                 <strong>Order Date:</strong> {{ $order->created_at }}
                             </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Invoice Date:</strong> LOGIC TO BE ADDED
-                            </td>
-                        </tr>
+                        </tr>      
                     </tbody>
                 </table>        
             </div>

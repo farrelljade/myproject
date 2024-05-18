@@ -1,18 +1,7 @@
 <x-layout>
     <x-slot:heading>
-        {{ $customer->id }} - {{ $customer->name }}
+        {{ $user->first_name }}'s profile
     </x-slot:heading>
-
-    <a href="{{ route('customers.edit', $customer->id) }}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Edit details</a>
-
-    <form method="POST" action="{{ route('customers.destroy', $customer->id) }}" class="inline mx-4">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onclick="return confirm('Are you sure you want to delete this customer?');">Delete details
-        </button>
-    </form>
-
-    <a href="{{ route('orders.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">New Order</a>
 
     <div class="flex flex-row mt-8 space-x-4">
         <div class="flex-1 overflow-x-auto shadow-md sm:rounded-lg">
@@ -21,29 +10,19 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Company Details
+                                Details
                             </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                {{ $customer->name }}
+                                <strong>Rep Code:</strong> {{ $user->id }}
                             </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                {{ $customer->address }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                {{ $customer->email }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                {{ $customer->number }}
+                                <strong>Email:</strong> {{ $user->email }}
                             </td>
                         </tr>
                     </tbody>
@@ -64,22 +43,12 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Sales Rep:</strong> {{ $customer->user->first_name }} {{ $customer->user->last_name }}
+                                <strong>Number of customers:</strong> {{ $totalCustomers }}
                             </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Send Callback:</strong> LOGIC TO BE ADDED!
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                Additional Info
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                Additional Info
+                                <strong>Number of prospects:</strong> LOGIC TO BE ADDED!
                             </td>
                         </tr>
                     </tbody>
@@ -95,22 +64,46 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Total Orders
+                                DERV
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Total Litres
+                                IHO
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Kerosene
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Gas Oil
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                AdBlue
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total
                             </th>
                         </tr>
                     </thead>
-          
+            
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <strong>{{ $totalOrders }}</strong>
+                            <strong>{{ $totalDerv }}</strong>
                             </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <strong>{{ $totalQuantity }}</strong>
-                          </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <strong>{{ $totalIho }}</strong>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <strong>{{ $totalKero }}</strong>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <strong>{{ $totalGas }}</strong>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <strong>{{ $totalAdblue }}</strong>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <strong>{{ $totalOrders }}</strong>
+                            </td>
                         </tr>
                     </tbody>
                 </table>        
@@ -125,49 +118,48 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Product
+                                Total Orders
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Quantity
+                                DERV Orders
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                PPL
+                                IHO
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Order Total
+                                Kerosene
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Date
+                                Gas Oil
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                AdBlue
                             </th>
                         </tr>
                     </thead>
-          
+            
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($allOrders as $order)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <a href="{{ route('orders.show', $order->id) }}" class="text-gray-600 hover:text-gray-900">
-                                    {{ $order->product_name }}
-                                </a>
+                                LTBA
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $order->quantity }}
+                                LTBA
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $order->ppl }}
+                                LTBA
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $order->total_cost }}
+                                LTBA
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $order->created_at }}
+                                LTBA
                             </td>
                         </tr>
-                        @endforeach
                     </tbody>          
                 </table>    
             </div>
         </div>
     </div>
-    
+
 </x-layout>

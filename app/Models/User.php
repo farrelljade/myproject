@@ -32,7 +32,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function customer(): HasMany
+    public function customers(): HasMany
     {
         return $this->hasMany(Customer::class);
     }

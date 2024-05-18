@@ -18,9 +18,12 @@ class NewOrderRequest extends FormRequest
             'product_name' => ['required', 'string', 'max:255'],
             'quantity' => ['required', 'numeric'],
             'ppl' => ['required', 'numeric'],
+            'ppl_sell_at' => ['required', 'numeric'],
+            'ppl_profit' => ['required', 'numeric'],
             'nett_cost' => ['required', 'numeric'],
             'vat' => ['required', 'numeric'],
-            'total_cost' => ['required', 'numeric']
+            'total_cost' => ['required', 'numeric'],
+            'profit' => ['required', 'numeric']
         ];
     }
 }

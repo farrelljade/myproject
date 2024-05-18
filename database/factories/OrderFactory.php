@@ -35,20 +35,26 @@ class OrderFactory extends Factory
                    $pricing[$products]['high'];
         }
 
-        $nettCost = $quantity * $ppl;
+        $pplSellAt = fake()->randomFloat(2, 0.01, 0.2) + $ppl;
+        $nettCost = $quantity * $pplSellAt;
         $vat = $nettCost / 100 * 20;
         $totalCost = $nettCost + $vat;
+        $pplProfit = $pplSellAt - $ppl;
+        $profit = ($pplSellAt - $ppl) * $quantity;
+
 
         return [
-            // inRandomOrder to get a random customer ID
             'customer_id' => Customer::inRandomOrder()->first()->id,
             'product_name' => $products,
             'quantity' => $quantity,
             // number_format to get 2 decimal places
             'ppl' => number_format($ppl, 2, '.', ''),
+            'ppl_sell_at' => number_format($pplSellAt, 2, '.', ''),
+            'ppl_profit' => number_format($pplProfit, 2, '.', ''),
             'nett_cost' => number_format($nettCost, 2, '.', ''),
             'vat' => number_format($vat, 2, '.', ''),
-            'total_cost' => number_format($totalCost, 2, '.', '')
+            'total_cost' => number_format($totalCost, 2, '.', ''),
+            'profit' => number_format($profit, 2, '.', ''),
         ];
     }
 }

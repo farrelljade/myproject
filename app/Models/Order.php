@@ -15,9 +15,12 @@ class Order extends Model
         'product_name',
         'quantity',
         'ppl',
+        'ppl_sell_at',
+        'ppl_profit',
         'nett_cost',
         'vat',
-        'total_cost'
+        'total_cost',
+        'profit'
     ];
 
     public function customer(): BelongsTo

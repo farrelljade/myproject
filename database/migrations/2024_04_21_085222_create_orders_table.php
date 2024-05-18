@@ -19,9 +19,12 @@ return new class extends Migration
             $table->string('product_name');
             $table->integer('quantity');
             $table->decimal('ppl', 8, 2);
+            $table->decimal('ppl_sell_at', 8, 2);
+            $table->decimal('ppl_profit', 8, 2);
             $table->decimal('nett_cost', 8, 2);
             $table->decimal('vat', 8, 2);
             $table->decimal('total_cost', 8, 2);
+            $table->decimal('profit', 8, 2);
             $table->timestamps();
         });
     }
