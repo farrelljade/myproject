@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -24,8 +25,13 @@ class CustomerController extends Controller
         return $columns;
     }
 
-    public function index(Request $request): View
+    public function index(Request $request): View | RedirectResponse
     {
+        if (Auth::guest()) {
+            return redirect()->route('auth.login')
+                ->with('success', 'Login required!');
+        }
+
         $query = Customer::query();
 
         // Filter by company name
@@ -71,7 +77,6 @@ class CustomerController extends Controller
         $validated = $request->validated();
         // Then create a new Customer and add to the Customer database
         Customer::create($validated);
-        // Redirect back to customer_registration page
 
         return redirect()->back()
                          ->with('success', 'Customer created successfully!');
@@ -97,7 +102,7 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
-        $customer = Customer::findOrFail($id);
+        $customer = Customer::findOrFail($id);  
         $customer->delete();
 
         return redirect()->route('customers.index')

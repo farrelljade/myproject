@@ -29,7 +29,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $totalCustomers = $this->userService->getTotalCustomers($id);
         $totalOrders = $this->userService->getTotalOrders($id);
-
         $totalDerv = $this->userService->getTotalProductOrders($id, 'DERV');
         $totalIho = $this->userService->getTotalProductOrders($id, 'IHO');
         $totalKero = $this->userService->getTotalProductOrders($id, 'Kerosene');

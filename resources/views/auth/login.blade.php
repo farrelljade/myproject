@@ -29,8 +29,8 @@
     </form>
 
     @if (session()->has('success'))
-        <p class="text-green-700 mt-4">
-            {{ session('success') }}
-        </p>
+    <p class="text-green-700 mt-4">
+        {{ session('success') }}
+    </p>
     @endif
 </x-layout>
