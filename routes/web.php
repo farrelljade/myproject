@@ -8,9 +8,15 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::resource('customers', CustomerController::class);
-Route::resource('orders', OrderController::class);
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('auth');
+
+Route::resource('customers', CustomerController::class)
+    ->middleware('auth');
+
+Route::resource('orders', OrderController::class)
+    ->Middleware('auth');
 
 // Route for customer search autocomplete.
 Route::get('api/customers/search', [OrderController::class, 'searchCustomers']);
@@ -20,8 +26,9 @@ Route::get('/register', [RegisterUserController::class, 'create'])->name('auth.r
 Route::post('/register', [RegisterUserController::class, 'store']);
 
 // Route for showing login page, logging in auth, and logging out
-Route::get('/login', [LoginController::class, 'create'])->name('auth.login');
+Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'destroy'])->name('auth.logout');
 
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)
+    ->middleware('auth');

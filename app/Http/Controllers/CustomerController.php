@@ -17,6 +17,7 @@ class CustomerController extends Controller
     {
         $columns = [
             ['name' => 'id', 'label' => 'Account Number'],
+            ['name' => 'user_id', 'label' => 'Rep'],
             ['name' => 'name', 'label' => 'Name', 'link' => 'customers.show'],
             ['name' => 'number', 'label' => 'Contact Number'],
             ['name' => 'email', 'label' => 'Email']
@@ -27,10 +28,10 @@ class CustomerController extends Controller
 
     public function index(Request $request): View | RedirectResponse
     {
-        if (Auth::guest()) {
-            return redirect()->route('auth.login')
-                ->with('success', 'Login required!');
-        }
+        // if (Auth::guest()) {
+        //     return redirect()->route('login')
+        //                      ->with('success', 'Login required!');
+        // }
 
         $query = Customer::query();
 

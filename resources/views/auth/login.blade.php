@@ -3,7 +3,7 @@
         Login
     </x-slot:heading>
 
-    <form action="{{ route('auth.login') }}" method="POST">
+    <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
