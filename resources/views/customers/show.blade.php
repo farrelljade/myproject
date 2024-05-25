@@ -95,8 +95,8 @@
         </div>
     </div>
 
-    <div class="flex flex-col mt-8">
-        <div class="overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="flex flex-row mt-8 space-x-4">
+        <div class="flex-1 overflow-x-auto shadow-md sm:rounded-lg">
             <div class="inline-block min-w-full align-middle">          
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -107,6 +107,9 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Total Litres
                             </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total Spent
+                            </th>
                         </tr>
                     </thead>
           
@@ -115,9 +118,33 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 <strong>{{ $totalOrders }}</strong>
                             </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <strong>{{ $totalQuantity }}</strong>
-                          </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <strong>{{ $totalQuantity }}</strong>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <strong>£{{ $totalSpent }}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>        
+            </div>
+        </div>
+        <div class="flex-1 overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="inline-block min-w-full align-middle">          
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                LTBA
+                            </th>
+                        </tr>
+                    </thead>
+          
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <strong>LTBA</strong>
+                            </td>
                         </tr>
                     </tbody>
                 </table>        
@@ -131,6 +158,9 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Invoice Number
+                            </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Product
                             </th>
@@ -152,10 +182,13 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($allOrders as $order)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <a href="{{ route('orders.show', $order->id) }}" class="text-gray-600 hover:text-gray-900">
-                                    {{ $order->product_name }}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-900">
+                                <a href="{{ route('orders.show', $order->id) }}">
+                                    {{ $order->id }}
                                 </a>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $order->product_name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $order->quantity }}

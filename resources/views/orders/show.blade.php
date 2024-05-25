@@ -4,7 +4,7 @@
     </x-slot:heading>
 
     <a href="{{ route('orders.edit', $order->id) }}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Amend order</a>
-    <a href="{{ route('customers.show', $order->customer->id ) }}" class="inline mx-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Back</a>
+    <a href="{{ route('customers.show', $order->customer->id ) }}" class="inline mx-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Customer profile</a>
 
     <div class="flex flex-row mt-8 space-x-4">
         <div class="flex-1 overflow-x-auto shadow-md sm:rounded-lg">

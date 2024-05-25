@@ -40,16 +40,16 @@
                                 Account Number
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Rep
+                                Company Name
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Name
+                                Email
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Contact Number
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Email
+                                Account Manager
                             </th>
                         </tr>
                     </thead>
@@ -58,21 +58,21 @@
                         @foreach ($customers as $customer)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <a href="{{ route('customers.show', $customer->id) }}" class="text-gray-600 hover:text-gray-900">
-                                    {{ $customer->id }}
-                                </a>              
+                                {{ $customer->id }}              
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
-                                {{ $customer->user->first_name }} {{ $customer->user->last_name }}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-900">
+                                <a href="{{ route('customers.show', $customer->id) }}">
+                                    {{ $customer->name }}
+                                </a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $customer->name }}
+                                {{ $customer->email}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $customer->number }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $customer->email }}
+                                {{ $customer->user->first_name }} {{ $customer->user->last_name }}
                             </td>
                         </tr>
                       @endforeach

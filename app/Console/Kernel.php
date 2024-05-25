@@ -1,7 +1,5 @@
 <?php
 
-// app/Console/Kernel.php
-
 namespace App\Console;
 
 use App\Console\Commands\GenerateOrders;
@@ -24,7 +22,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // Define your scheduled tasks here
+        $schedule->command('app:generate-orders')->everyMinute();
     }
 
     /**

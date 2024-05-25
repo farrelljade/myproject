@@ -22,6 +22,7 @@
                                 <a href="{{ route('orders.index') }}" class="{{ request()->is('orders') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Orders</a>
                                 <a href="{{ route('customers.create') }}" class="{{ request()->is('customers/create') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Customer</a>
                                 <a href="{{ route('orders.create') }}" class="{{ request()->is('orders/create') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Order</a>
+                                <a href="{{ route('admin.index') }}" class="{{ request()->is('admin') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Admin Dashboard</a>
                             </div>
                         </div>      
                     </div>
@@ -43,17 +44,6 @@
                         </div>
                     </form>
                     @endauth
-                </div>
-            </div>
-        
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="md:hidden" id="mobile-menu">
-                <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <a href="/" class="{{ request()->is('/') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                    <a href="{{ route('customers.index') }}" class="{{ request()->is('customers') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Customers</a>
-                    <a href="{{ route('orders.index') }}" class="{{ request()->is('orders') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Orders</a>
-                    <a href="{{ route('customers.create') }}" class="{{ request()->is('customers/create') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Customer</a>
-                    <a href="{{ route('orders.create') }}" class="{{ request()->is('orders/create') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Order</a>
                 </div>
             </div>
         </nav>

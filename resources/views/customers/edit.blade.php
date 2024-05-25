@@ -9,7 +9,7 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">    
             <div>
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company name</label>
-                <input type="text" name="name" id="name" value="{{ $customer->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <input type="text" name="name" id="name" value="{{ $customer->name }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 @error('name')
                     <div class="text-xs text-red-600 font-semibold mt-1">Company name required</div>  
                 @enderror
@@ -25,7 +25,7 @@
 
             <div class="col-span-full">
                 <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Invoice address</label>  
-                <input type="text" name="address" id="address" value="{{ $customer->address }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Start typing and select your address">
+                <input type="text" name="address" id="address" value="{{ $customer->address }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Start typing and select your address">
                 @error('address')
                     <div class="text-xs text-red-600 font-semibold mt-1">Invoice address required</div>  
                 @enderror

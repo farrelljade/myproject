@@ -115,13 +115,15 @@ class CustomerController extends Controller
     {
         $totalQuantity = $customer->orders()->sum('quantity');
         $totalOrders = $customer->orders()->count();
+        $totalSpent = $customer->orders()->sum('total_cost');
         $allOrders = $customer->orders()->latest()->get();
 
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,
             'totalOrders' => $totalOrders,
+            'totalSpent' => $totalSpent,
             'customer' => $customer,
-            'allOrders' => $allOrders
+            'allOrders' => $allOrders,
         ]);
     }
 }
