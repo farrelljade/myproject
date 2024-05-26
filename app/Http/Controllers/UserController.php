@@ -43,7 +43,17 @@ class UserController extends Controller
             'totalIho' => $totalIho,
             'totalKero' => $totalKero,
             'totalGas' => $totalGas,
-            'totalAdblue' => $totalAdblue
+            'totalAdblue' => $totalAdblue,
+        ]);
+    }
+
+    public function getCustomerList($id): View
+    {
+        $customerList = $this->userService->getCustomerList($id);
+
+        return view('users.customers', [
+            'user' => User::findOrFail($id),
+            'customerList' => $customerList
         ]);
     }
 }

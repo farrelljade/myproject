@@ -8,17 +8,49 @@
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
                         <label for="customer_search" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Search Customer</label>
                         <div class="mt-2">
-                            <input type="text" id="customer_search" name="customer_search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search Customer">
-                            <input type="hidden" id="customer_id" name="customer_id">
+                            @if (isset($customerId) && isset($customerName))
+                                <input type="text" id="customer_search" value="{{ $customerName }}" name="customer_search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search Customer" readonly>
+                                <input type="hidden" id="customer_id" value="{{ $customerId }}" name="customer_id" readonly>
+                            @else
+                                <input type="text" id="customer_search" name="customer_search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search Customer">
+                                <input type="hidden" id="customer_id" name="customer_id">
+                            @endif
                         </div>
                         @error('customer_id')
                             <div class="text-xs text-red-600 font-semibold mt-1">Customer field is required</div>  
                         @enderror
                     </div>
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-1">
+                        <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Quantity</label>
+                        <div class="mt-2">
+                            <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
+                        </div>
+                        @error('quantity')
+                            <div class="text-xs text-red-600 font-semibold mt-1">Quantity is required</div>  
+                        @enderror
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="ppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cost ppl</label>
+                        <div class="mt-2">
+                            <input type="text" name="ppl" id="ppl" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="ppl_sell_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sell ppl</label>
+                        <div class="mt-2">
+                            <input type="text" name="ppl_sell_at" id="ppl_sell_at" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Selling At">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="ppl_profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit ppl</label>
+                        <div class="mt-2">
+                            <input type="text" name="ppl_profit" id="ppl_profit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
                         <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product</label>
                         <div class="mt-2">
                             <select name="product_name" id="product_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -32,52 +64,25 @@
                             <div class="text-xs text-red-600 font-semibold mt-1">Product field is required</div>  
                         @enderror
                     </div>
-                    <div class="sm:col-span-3">
-                        <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Quantity</label>
-                        <div class="mt-2">
-                            <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
-                        </div>
-                        @error('quantity')
-                            <div class="text-xs text-red-600 font-semibold mt-1">Quantity is required</div>  
-                        @enderror
-                    </div>
-                    <div class="sm:col-span-3">
-                        <label for="ppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cost ppl</label>
-                        <div class="mt-2">
-                            <input type="text" name="ppl" id="ppl" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        </div>
-                    </div>
-                    <div class="sm:col-span-3">
-                        <label for="ppl_sell_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sell ppl</label>
-                        <div class="mt-2">
-                            <input type="text" name="ppl_sell_at" id="ppl_sell_at" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        </div>
-                    </div>
-                    <div class="sm:col-span-3">
-                        <label for="ppl_profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit ppl</label>
-                        <div class="mt-2">
-                            <input type="text" name="ppl_profit" id="ppl_profit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        </div>
-                    </div>
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-1">
                         <label for="nett_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nett</label>
                         <div class="mt-2">
                             <input type="text" name="nett_cost" id="nett_cost" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
                     </div>
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-1">
                         <label for="vat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">VAT</label>
                         <div class="mt-2">
                             <input type="text" name="vat" id="vat" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
                     </div>
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-1">
                         <label for="total_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total</label>
                         <div class="mt-2">
                             <input type="text" name="total_cost" id="total_cost" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
                     </div>           
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-1">
                         <label for="profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit</label>
                         <div class="mt-2">
                             <input type="text" name="profit" id="profit" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">

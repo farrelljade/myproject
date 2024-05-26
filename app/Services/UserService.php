@@ -19,6 +19,12 @@ class UserService
         return $user->customers()->count();
     }
 
+    public function getCustomerList($id)
+    {
+        $user = $this->user->findOrFail($id);
+        return $user->customers()->get();
+    }
+
     public function getTotalOrders($id)
     {
         $user = $this->user->findOrFail($id);

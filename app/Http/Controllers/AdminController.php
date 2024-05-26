@@ -14,13 +14,17 @@ class AdminController extends Controller
         $users = User::all();
         $query = Customer::query();
 
-        if ($request->input('customer_status') === 'active') {
-            $query->whereNull('deleted_at');
-        } elseif ($request->input('customer_status') === 'trashed') {
-            $query->onlyTrashed()->get();
-        }
+        if ($request->has('customer_status')) {
+            if ($request->input('customer_status') === 'active') {
+                $query->whereNull('deleted_at');
+            } elseif ($request->input('customer_status') === 'trashed') {
+                $query->onlyTrashed()->get();
+            }
 
-        $customers = $query->latest()->paginate(10);
+            $customers = $query->latest()->paginate(10);
+        } else {
+            $customers = collect();
+        }
 
         return view('admin.index', [
             'users' => $users,

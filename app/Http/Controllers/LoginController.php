@@ -32,17 +32,13 @@ class LoginController extends Controller
         // Regenerate the session ID to prevent session fixation attacks
         $request->session()->regenerate();
 
-        // Redirect to the intended page or home
         return redirect()->route('home')->with('success', 'Successfully logged in');
     }
 
     public function destroy()
     {
-        // Log out the user
-        // Auth::guard('user')->logout();
         Auth::logout();
 
-        // Redirect to the home page with a success message
         return redirect()->route('login')->with('success', 'Successfully logged out');
     }
 }

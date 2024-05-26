@@ -9,8 +9,7 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home')
+Route::get('/', [HomeController::class, 'index'])->name('home')
     ->middleware('auth');
 
 Route::resource('customers', CustomerController::class)
@@ -30,6 +29,9 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'destroy'])->name('auth.logout');
 
 Route::resource('users', UserController::class)
+    ->middleware('auth');
+
+Route::get('/users/{id}/customers', [UserController::class, 'getCustomerList'])->name('users.customers')
     ->middleware('auth');
 
 Route::middleware('auth')->group(function () {

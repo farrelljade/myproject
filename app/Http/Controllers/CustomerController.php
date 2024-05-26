@@ -28,11 +28,6 @@ class CustomerController extends Controller
 
     public function index(Request $request): View | RedirectResponse
     {
-        // if (Auth::guest()) {
-        //     return redirect()->route('login')
-        //                      ->with('success', 'Login required!');
-        // }
-
         $query = Customer::query();
 
         // Filter by company name
@@ -110,13 +105,12 @@ class CustomerController extends Controller
                          ->with('success', 'Customer details successfully removed');
     }
 
-    // Function to get customers total orders and quantity
     public function show(Customer $customer): View
     {
         $totalQuantity = $customer->orders()->sum('quantity');
         $totalOrders = $customer->orders()->count();
         $totalSpent = $customer->orders()->sum('total_cost');
-        $allOrders = $customer->orders()->latest()->get();
+        $allOrders = $customer->orders()->latest()->paginate(5);
 
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,

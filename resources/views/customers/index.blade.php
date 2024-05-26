@@ -61,7 +61,7 @@
                                 {{ $customer->id }}              
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-900">
-                                <a href="{{ route('customers.show', $customer->id) }}">
+                                <a href="{{ route('customers.show', $customer) }}">
                                     {{ $customer->name }}
                                 </a>
                             </td>

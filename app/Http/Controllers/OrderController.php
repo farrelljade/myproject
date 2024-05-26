@@ -16,6 +16,7 @@ class OrderController extends Controller
     {
         $search = $request->get('term');
         $customer = Customer::where('name', 'LIKE', '%'. $search. '%')->get(['id', 'name as value']);
+
         return response()->json($customer);
     }
 
@@ -72,13 +73,19 @@ class OrderController extends Controller
         ]);
     }
 
-    public function create(): View
+    public function create(Request $request): View
     {
+        $customerId = $request->get('customer_id');
+        $customerName = $request->get('customer_name');
+
         $customers = Customer::orderBy('name', 'asc')->get();
         $products = ['DERV', 'IHO', 'Kerosene', 'Gas Oil', 'AdBlue'];
+
         return view('orders.create', [
             'customers' => $customers,
-            'products' => $products
+            'products' => $products,
+            'customerId' => $customerId,
+            'customerName' => $customerName
         ]);
     }
 
@@ -86,6 +93,7 @@ class OrderController extends Controller
     {
         $validated = $request->validated();
         Order::create($validated);
+
         return redirect()->back()->with('success', 'Order created successfully');
     }
 
