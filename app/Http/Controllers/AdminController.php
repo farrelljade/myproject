@@ -11,6 +11,10 @@ class AdminController extends Controller
 {
     public function index(Request $request): View
     {
+        if (!$request->user()->is_admin) {
+            abort(403);
+        }
+
         $users = User::all();
         $query = Customer::query();
 

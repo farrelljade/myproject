@@ -22,7 +22,9 @@
                                 <a href="{{ route('orders.index') }}" class="{{ request()->is('orders') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Orders</a>
                                 <a href="{{ route('customers.create') }}" class="{{ request()->is('customers/create') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Customer</a>
                                 <a href="{{ route('orders.create') }}" class="{{ request()->is('orders/create') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New Order</a>
-                                <a href="{{ route('admin.index') }}" class="{{ request()->is('admin') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Admin Dashboard</a>
+                                @if (Auth::user()->is_admin)
+                                    <a href="{{ route('admin.index') }}" class="{{ request()->is('admin') ? 'bg-green-900 text-white': 'text-gray-300 hover:bg-green-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Admin Dashboard</a>   
+                                @endif
                             </div>
                         </div>      
                     </div>
