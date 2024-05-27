@@ -23,12 +23,8 @@ class RegisterUserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
 
-        // Create User
         $user = User::create($credentials);
-
-        // Log user in
         Auth::login($user);
-
         // Regenerate the session ID to prevent session fixation attacks
         $request->session()->regenerate();
 

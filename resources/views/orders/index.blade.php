@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-    {{ $orders->appends(request()->except('page'))->links() }}
+    {{ $orders->withQueryString()->links() }}
 </x-layout>
 
 <!-- jQuery and jQuery UI -->

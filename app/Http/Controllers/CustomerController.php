@@ -8,10 +8,17 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Services\CustomerService;
 
 class CustomerController extends Controller
 {
+    protected $customerService;
+
+    public function __construct(CustomerService $customerService)
+    {
+        $this->customerService = $customerService;
+    }
+
     // Define table columns for the customer index view
     private function getTableColumns()
     {
@@ -107,9 +114,9 @@ class CustomerController extends Controller
 
     public function show(Customer $customer): View
     {
-        $totalQuantity = $customer->orders()->sum('quantity');
+        $totalQuantity = $this->customerService->getTotalQuantity($customer->id);
         $totalOrders = $customer->orders()->count();
-        $totalSpent = $customer->orders()->sum('total_cost');
+        $totalSpent = $this->customerService->getTotalSpent($customer->id);
         $allOrders = $customer->orders()->latest()->paginate(5);
 
         return view('customers.show', [

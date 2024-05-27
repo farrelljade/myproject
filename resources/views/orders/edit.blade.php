@@ -3,100 +3,102 @@
         Update Order
     </x-slot:heading>
 
-  <form action="{{ route('orders.update', $order->id) }}" method="post">
-    @csrf
-    @method('PATCH')
-    <div class="space-y-12">
-        <div class="border-b border-gray-900/10 pb-12">
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="sm:col-span-3">
-                <label for="customer_search" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer</label>
-                <div class="mt-2">
-                    <input type="text" name="customer_search" id="customer_search" value="{{ $order->customer->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
-                </div>
-                @error('customer_id')
-                    <div class="text-xs text-red-600 font-semibold mt-1">Customer field is required</div>  
-                @enderror
-                </div>
-                <div class="sm:col-span-3">
-                <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product</label>
-                <div class="mt-2">
-                    <input type="text" name="product_name" id="product_name" value="{{ $order->product_name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
-                </div>
-                @error('product_name')
-                    <div class="text-xs text-red-600 font-semibold mt-1">Product field is required</div>  
-                @enderror
-                </div>
-                <div class="sm:col-span-3">
-                    <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Quantity</label>
-                    <div class="mt-2">
-                        <input type="number" name="quantity" id="quantity" value="{{ $order->quantity }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
+    <div class="flex items-center justify-center min-h-screen bg-gray-100">
+        <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+            <form action="{{ route('orders.update', $order->id) }}" method="post">
+                @csrf
+                @method('PATCH')
+                <div class="grid grid-cols-1 gap-x-6 gap-y-8">
+                    <div class="sm:col-span-2">
+                        <label for="customer_search" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer</label>
+                        <div class="mt-2">
+                            <input type="text" name="customer_search" id="customer_search" value="{{ $order->customer->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
+                        </div>
+                        @error('customer_id')
+                            <div class="text-xs text-red-600 font-semibold mt-1">Customer field is required</div>  
+                        @enderror
                     </div>
-                    @error('quantity')
-                        <div class="text-xs text-red-600 font-semibold mt-1">Quantity is required</div>  
-                    @enderror
-                </div>
-                <div class="sm:col-span-3">
-                    <label for="ppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cost ppl</label>
-                    <div class="mt-2">
-                        <input type="text" name="ppl" id="ppl" value="{{ $order->ppl }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <div class="sm:col-span-1">
+                        <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product</label>
+                        <div class="mt-2">
+                            <input type="text" name="product_name" id="product_name" value="{{ $order->product_name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
+                        </div>
+                        @error('product_name')
+                            <div class="text-xs text-red-600 font-semibold mt-1">Product field is required</div>  
+                        @enderror
                     </div>
-                </div>     
-                <div class="sm:col-span-3">
-                    <label for="ppl_sell_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sell ppl</label>
-                    <div class="mt-2">
-                        <input type="text" name="ppl_sell_at" id="ppl_sell_at" value="{{ $order->ppl_sell_at }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                    @error('ppl_sell_at')
-                        <div class="text-xs text-red-600 font-semibold mt-1">Sell PPL required</div>  
-                    @enderror
-                </div>     
-                <div class="sm:col-span-3">
-                    <label for="ppl_profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit ppl</label>
-                    <div class="mt-2">
-                        <input type="text" name="ppl_profit" id="ppl_profit" value="{{ $order->ppl_profit }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                </div>     
-                <div class="sm:col-span-3">
-                    <label for="nett_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nett</label>
-                    <div class="mt-2">
-                        <input type="text" name="nett_cost" id="nett_cost" value="{{ $order->nett_cost }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                </div>     
-                <div class="sm:col-span-3">
-                    <label for="vat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">VAT</label>
-                    <div class="mt-2">
-                        <input type="text" name="vat" id="vat" value="{{ $order->vat }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                </div>     
-                <div class="sm:col-span-3">
-                    <label for="total_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total</label>
-                    <div class="mt-2">
-                        <input type="text" name="total_cost" id="total_cost" value="{{ $order->total_cost }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                </div>
-                <div class="sm:col-span-3">
-                    <label for="ppl_profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit</label>
-                    <div class="mt-2">
-                        <input type="text" name="profit" id="profit" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
-        
-    
-    <div class="mt-6 flex items-center justify-end gap-x-6">
-      <a href="{{ route('customers.show', $order->customer->id) }}" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cancel</a>
-      <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
-    </div>
-  </form>
 
-  @if (session()->has('success'))
-  <p class="text-green-700">
-      {{ session()->get('success'); }}
-  </p>
-  @endif
+                    <div class="sm:col-span-1">
+                        <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Quantity</label>
+                        <div class="mt-2">
+                            <input type="number" name="quantity" id="quantity" value="{{ $order->quantity }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Quantity Amount">
+                        </div>
+                        @error('quantity')
+                            <div class="text-xs text-red-600 font-semibold mt-1">Quantity is required</div>  
+                        @enderror
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="ppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cost ppl</label>
+                        <div class="mt-2">
+                            <input type="text" name="ppl" id="ppl" value="{{ $order->ppl }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>     
+                    <div class="sm:col-span-1">
+                        <label for="ppl_sell_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sell ppl</label>
+                        <div class="mt-2">
+                            <input type="text" name="ppl_sell_at" id="ppl_sell_at" value="{{ $order->ppl_sell_at }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                        @error('ppl_sell_at')
+                            <div class="text-xs text-red-600 font-semibold mt-1">Sell PPL required</div>  
+                        @enderror
+                    </div>     
+                    <div class="sm:col-span-1">
+                        <label for="ppl_profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit ppl</label>
+                        <div class="mt-2">
+                            <input type="text" name="ppl_profit" id="ppl_profit" value="{{ $order->ppl_profit }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>     
+                    <div class="sm:col-span-1">
+                        <label for="nett_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nett</label>
+                        <div class="mt-2">
+                            <input type="text" name="nett_cost" id="nett_cost" value="{{ $order->nett_cost }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>     
+                    <div class="sm:col-span-1">
+                        <label for="vat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">VAT</label>
+                        <div class="mt-2">
+                            <input type="text" name="vat" id="vat" value="{{ $order->vat }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>     
+                    <div class="sm:col-span-1">
+                        <label for="total_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total</label>
+                        <div class="mt-2">
+                            <input type="text" name="total_cost" id="total_cost" value="{{ $order->total_cost }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="ppl_profit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profit</label>
+                        <div class="mt-2">
+                            <input type="text" name="profit" id="profit" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+                    </div>
+                </div>
+                  
+                    
+                
+                <div class="mt-6 flex items-center justify-center gap-x-6">
+                    <a href="{{ route('customers.show', $order->customer->id) }}" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cancel</a>
+                    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (session()->has('success'))
+    <p class="text-green-700">
+        {{ session()->get('success'); }}
+    </p>
+    @endif
 
 </x-layout>
 

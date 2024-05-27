@@ -43,6 +43,6 @@ class AdminController extends Controller
         $restoreCustomer = Customer::withTrashed()->findOrFail($id);
         $restoreCustomer->restore();
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.index')->with('success', 'Customer restored successfully');
     }
 }

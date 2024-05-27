@@ -17,7 +17,7 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Rep Code:</strong> {{ $user->id }}
+                                <strong>Rep code:</strong> {{ $user->id }}
                             </td>
                         </tr>
                         <tr>
@@ -48,7 +48,7 @@
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Prospects:</strong> LOGIC TO BE ADDED!
+                                <strong>Total spent:</strong> £{{ $totalSpent }}
                             </td>
                         </tr>
                     </tbody>

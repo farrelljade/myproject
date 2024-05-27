@@ -3,6 +3,12 @@
         Admin Dashboard
     </x-slot:heading>
 
+    @if (session()->has('success'))
+    <p class="text-green-700 my-6">
+        {{ session('success') }}
+    </p>
+    @endif
+
     <form action="{{ route('admin.index') }}" method="get" class="mb-4">
         <div class="grid gap-6 mb-6 md:grid-cols-4">
             <div>
@@ -13,9 +19,6 @@
                         <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>  
                     @endforeach
                 </select>
-                @error('user_id')
-                  <div class="text-xs text-red-600 font-semibold mt-1">required</div>  
-                @enderror
             </div>
             <div>
                 <label for="customer_status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Type</label>
@@ -24,9 +27,6 @@
                     <option value="active">Active customers</option>
                     <option value="trashed">Trashed Customers</option>
                 </select>
-                @error('customer_status')
-                <div class="text-xs text-red-600 font-semibold mt-1">required</div>  
-                @enderror
             </div>
         </div>
         <a href="{{ route('admin.index') }}" method="get" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Reset Filters</a>
@@ -81,6 +81,6 @@
             </div>
         </div>
         
-        {{ $customers->links() }}
+        {{ $customers->withQueryString()->links()}}
     @endif
 </x-layout>
