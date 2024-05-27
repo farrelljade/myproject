@@ -15,24 +15,26 @@ class AdminController extends Controller
             abort(403);
         }
 
-        $users = User::all();
         $query = Customer::query();
 
+        if ($userId = $request->input('user_id')) {
+            $query->where('user_id', $userId);
+        }
+
+        // Filter by customers' status (active or trashed)
         if ($request->has('customer_status')) {
             if ($request->input('customer_status') === 'active') {
                 $query->whereNull('deleted_at');
             } elseif ($request->input('customer_status') === 'trashed') {
-                $query->onlyTrashed()->get();
+                $query->onlyTrashed();
             }
-
-            $customers = $query->latest()->paginate(10);
-        } else {
-            $customers = collect();
         }
 
+        $customers = $query->latest()->paginate(10);
+
         return view('admin.index', [
-            'users' => $users,
-            'customers' => $customers
+            'users' => User::all(),
+            'customers' => $customers,
         ]);
     }
 
@@ -41,8 +43,6 @@ class AdminController extends Controller
         $restoreCustomer = Customer::withTrashed()->findOrFail($id);
         $restoreCustomer->restore();
 
-        return view('admin.restore', [
-            'restoreCustomer' => $restoreCustomer
-        ]);
+        return redirect()->route('admin.index');
     }
 }
