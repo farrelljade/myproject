@@ -57,12 +57,20 @@ class UserController extends Controller
 
         foreach ($customerList as $customer) {
             $customerTotals[$customer->id] = $this->customerService->getCustomerTotalSpend($customer->id);
+            $customerProfits[$customer->id] = $this->customerService->getTotalProfit($customer->id);
+            $customerOrders[$customer->id] = $this->customerService->getCustomerTotalOrders($customer->id);
+            $customerQuantities[$customer->id] = $this->customerService->getTotalQuantity($customer->id);
+            $customerAvgPpl[$customer->id] = $this->customerService->getCustomerAvgPpl($customer->id);
         }
 
         return view('users.customers', [
             'user' => User::findOrFail($id),
             'customerList' => $customerList,
-            'customerTotals' => $customerTotals
+            'customerTotals' => $customerTotals,
+            'customerProfits' => $customerProfits,
+            'customerOrders' => $customerOrders,
+            'customerQuantities' => $customerQuantities,
+            'customerAvgPpl' => $customerAvgPpl
         ]);
     }
 }
