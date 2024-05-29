@@ -37,6 +37,7 @@ class UserController extends Controller
         $totalGas = $this->userService->getTotalProductOrders($id, 'Gas Oil');
         $totalAdblue = $this->userService->getTotalProductOrders($id, 'AdBlue');
         $totalSpent = $this->customerService->getTotalSpent($id);
+        $totalProfit = $this->userService->getTotalProfit($id);
 
         return view('users.show', [
             'user' => $user,
@@ -48,6 +49,7 @@ class UserController extends Controller
             'totalGas' => $totalGas,
             'totalAdblue' => $totalAdblue,
             'totalSpent' => $totalSpent,
+            'totalProfit' => $totalProfit
         ]);
     }
 
@@ -70,7 +72,16 @@ class UserController extends Controller
             'customerProfits' => $customerProfits,
             'customerOrders' => $customerOrders,
             'customerQuantities' => $customerQuantities,
-            'customerAvgPpl' => $customerAvgPpl
+            'customerAvgPpl' => $customerAvgPpl,
+        ]);
+    }
+
+    public function getUserProfit($id): View
+    {
+        $customers = $this->userService->getCustomerProfitList($id);
+
+        return view('users.profit', [
+            'customers' => $customers
         ]);
     }
 }

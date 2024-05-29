@@ -22,7 +22,7 @@ class UserService
     public function getCustomerList($id)
     {
         $user = $this->user->findOrFail($id);
-        return $user->customers()->paginate(5);
+        return $user->customers()->paginate(10);
     }
 
     public function getUserTotalOrders($id)
@@ -37,6 +37,14 @@ class UserService
         $user = $this->user->findOrFail($id);
         return $user->customers()->with('orders')->get()->sum(function($customer) {
             return $customer->orders->sum('total_cost');
+        });
+    }
+
+    public function getTotalProfit($id)
+    {
+        $user = $this->user->findOrFail($id);
+        return $user->customers()->with('orders')->get()->sum(function($customer) {
+            return $customer->orders->sum('profit');
         });
     }
 
@@ -60,5 +68,21 @@ class UserService
         }])->get()->sum(function($customer) {
             return $customer->orders->count();
         });
+    }
+
+    // Get list of customers by profit
+    public function getCustomerProfitList($id)
+    {
+        $user = $this->user->findOrFail($id);
+        $customers = $user->customers()
+            ->with('orders')
+            ->get()
+            ->map(function ($customer) {
+                $customer->total_profit = $customer->orders->sum('profit');
+                return $customer;
+            })
+            ->sortByDesc('total_profit');
+
+        return $customers;
     }
 }

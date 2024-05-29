@@ -57,7 +57,7 @@ class CustomerController extends Controller
         }
 
         $columns = $this->getTableColumns();
-        $customers = $query->latest()->paginate();
+        $customers = $query->latest()->paginate(10);
         return view('customers.index', [
             'customers' => $customers,
             'columns' => $columns

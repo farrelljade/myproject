@@ -48,7 +48,7 @@
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Total spent:</strong> £{{ $totalSpent }}
+                                <strong>Total spent:</strong> £{{ number_format($totalSpent, 2) }}
                             </td>
                         </tr>
                     </tbody>
@@ -69,12 +69,12 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Number of customers:</strong> {{ $totalCustomers }}
+                                <strong>Total profit:</strong> £{{ number_format($totalProfit, 2) }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Number of prospects:</strong> LOGIC TO BE ADDED!
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500">
+                                <a href="{{ route('users.profit', $user) }}">Profit Report</a>
                             </td>
                         </tr>
                     </tbody>

@@ -97,29 +97,29 @@
                                 <strong>Quantity:</strong> {{ $order->quantity }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Cost ppl:</strong> {{ $order->ppl }}
+                                <strong>Cost ppl:</strong> £{{ $order->ppl }}
                             </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Sell ppl:</strong> {{ $order->ppl_sell_at }}
+                                <strong>Sell ppl:</strong> £{{ number_format($order->ppl_sell_at, 4) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Profit ppl:</strong> £{{ $order->ppl_profit }}
+                                <strong>Profit ppl:</strong> £{{ number_format($order->ppl_profit, 4) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Total Profit:</strong> £{{ $order->profit }}
+                                <strong>Total Profit:</strong> £{{ number_format($order->profit, 2) }}
                             </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Nett Total:</strong> £{{ $order->nett_cost }}
+                                <strong>Nett Total:</strong> £{{ number_format($order->nett_cost, 2) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>VAT:</strong> £{{ $order->vat }}
+                                <strong>VAT:</strong> £{{ number_format($order->vat, 2) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Order Total:</strong> £{{ $order->total_cost }}
+                                <strong>Order Total:</strong> £{{ number_format($order->total_cost, 2) }}
                             </td>
                         </tr>
                     </tbody>

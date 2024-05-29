@@ -31,8 +31,10 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('auth.logout')
 Route::resource('users', UserController::class)
     ->middleware('auth');
 
-Route::get('/users/{id}/customers', [UserController::class, 'getCustomerList'])->name('users.customers')
-    ->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/users/{id}/customers', [UserController::class, 'getCustomerList'])->name('users.customers');
+    Route::get('/users/{id}/profit-list', [UserController::class, 'getUserProfit'])->name('users.profit');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
