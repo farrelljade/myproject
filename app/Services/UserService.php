@@ -54,7 +54,8 @@ class UserService
         $user = $this->user->findOrFail($id);
         return $user->customers()->with(['orders' => function($query) use ($productName) {
             $query->where('product_name', $productName);
-        }])->get()->sum(function($customer) {
+        }])
+        ->get()->sum(function($customer) {
             return $customer->orders->sum('total_cost');
         });
     }
@@ -65,7 +66,8 @@ class UserService
         $user = $this->user->findOrFail($id);
         return $user->customers()->with(['orders' => function($query) use ($productName) {
             $query->where('product_name', $productName);
-        }])->get()->sum(function($customer) {
+        }])
+        ->get()->sum(function($customer) {
             return $customer->orders->count();
         });
     }
@@ -82,6 +84,22 @@ class UserService
                 return $customer;
             })
             ->sortByDesc('total_profit');
+
+        return $customers;
+    }
+
+    // Get list of customers by Avg. profit
+    public function getCustomerAvgProfitList($id)
+    {
+        $user = $this->user->findOrFail($id);
+        $customers = $user->customers()
+            ->with('orders')
+            ->get()
+            ->map(function ($customer) {
+                $customer->avg_profit = $customer->orders->avg('ppl_profit');
+                return $customer;
+            })
+            ->sortByDesc('avg_profit');
 
         return $customers;
     }

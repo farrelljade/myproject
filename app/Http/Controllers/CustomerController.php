@@ -118,6 +118,9 @@ class CustomerController extends Controller
         $totalOrders = $customer->orders()->count();
         $totalSpent = $this->customerService->getTotalSpent($customer->id);
         $allOrders = $customer->orders()->latest()->paginate(5);
+        $totalDerv = $this->customerService->getCustomerProductTotal($customer->id, 'DERV');
+        $totalIho = $this->customerService->getCustomerProductTotal($customer->id, 'IHO');
+        $totalKero = $this->customerService->getCustomerProductTotal($customer->id, 'Kerosene');
 
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,
@@ -125,6 +128,9 @@ class CustomerController extends Controller
             'totalSpent' => $totalSpent,
             'customer' => $customer,
             'allOrders' => $allOrders,
+            'totalDerv' => $totalDerv,
+            'totalIho' => $totalIho,
+            'totalKero' => $totalKero
         ]);
     }
 }

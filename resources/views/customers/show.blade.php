@@ -106,13 +106,13 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <strong>{{ $totalOrders }}</strong>
+                                {{ $totalOrders }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <strong>{{ $totalQuantity }}</strong>
+                                {{ number_format($totalQuantity) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <strong>£{{ $totalSpent }}</strong>
+                                £{{ $totalSpent }}
                             </td>
                         </tr>
                     </tbody>
@@ -125,7 +125,13 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                LTBA
+                                Total DERV
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total IHO
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total Kerosene
                             </th>
                         </tr>
                     </thead>
@@ -133,7 +139,13 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                <strong>LTBA</strong>
+                                £{{ number_format($totalDerv, 2) }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                £{{ number_format($totalIho, 2) }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                £{{ number_format($totalKero, 2) }}
                             </td>
                         </tr>
                     </tbody>
@@ -158,7 +170,10 @@
                                 LTS
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                PPL
+                                PPL Cost
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                PPL Sell
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Order Total
@@ -180,22 +195,25 @@
                                     {{ $order->id }}
                                 </a>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 {{ $order->product_name }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 {{ $order->quantity }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                £{{ $order->ppl }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 £{{ $order->ppl_sell_at }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 £{{ number_format($order->total_cost, 2) }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 £{{ number_format($order->profit, 2) }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 {{ $order->created_at }}
                             </td>
                         </tr>

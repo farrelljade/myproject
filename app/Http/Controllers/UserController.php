@@ -78,10 +78,13 @@ class UserController extends Controller
 
     public function getUserProfit($id): View
     {
-        $customers = $this->userService->getCustomerProfitList($id);
+        $customersProfit = $this->userService->getCustomerProfitList($id);
+        $customersAvg = $this->userService->getCustomerAvgProfitList($id);
+
 
         return view('users.profit', [
-            'customers' => $customers
+            'customersProfit' => $customersProfit,
+            'customersAvg' => $customersAvg
         ]);
     }
 }

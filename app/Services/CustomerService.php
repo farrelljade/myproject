@@ -34,6 +34,16 @@ class CustomerService
         return $customer->orders()->sum('profit');
     }
 
+    public function getCustomerProductTotal($id, $productName)
+    {
+        $customer = $this->customer->findOrFail($id);
+        $orders = $customer->orders()
+            ->where('product_name', $productName)
+            ->get();
+
+        return $orders->sum('total_cost');
+    }
+
     // Get total spent by a specific customer
     public function getCustomerTotalSpend($id)
     {
