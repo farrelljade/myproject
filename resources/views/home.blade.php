@@ -5,16 +5,8 @@
 
     {{-- Just experimenting with eloquent queries on this page for now --}}
 
-    {{-- @foreach ($orders as $order)
-        {{ $order->name }} - {{ $order->email }}<br>
-    @endforeach --}}
-
-    {{-- @foreach ($users as $user)
-        {{ $user->name }} - £{{ $user->total_cost }}<br>
-    @endforeach --}}
-
     @foreach ($users as $user)
-    {{ $user->first_name }}'s customers have made {{ $user->orders_count }} orders<br>
+    {{ $loop->iteration }} - {{ $user->first_name }}'s customers have made {{ $user->orders_count }} orders<br>
     @endforeach
 
     <br><br>

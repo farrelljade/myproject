@@ -3,6 +3,12 @@
         New Order
     </x-slot:heading>
 
+    @if (session()->has('success'))
+        <p class="text-green-700">
+            {{ session()->get('success'); }}
+        </p>
+    @endif
+
     <div class="flex items-center justify-center min-h-screen bg-gray-100">
         <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
             <form action="{{ route('orders.store') }}" method="POST">
@@ -97,12 +103,6 @@
             </form>
         </div>
     </div>
-
-    @if (session()->has('success'))
-      <p class="text-green-700">
-          {{ session()->get('success'); }}
-      </p>
-    @endif
     
 </x-layout>
 

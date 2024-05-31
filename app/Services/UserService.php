@@ -81,6 +81,7 @@ class UserService
             ->get()
             ->map(function ($customer) {
                 $customer->total_profit = $customer->orders->sum('profit');
+                $customer->total_orders = $customer->orders->count();
                 return $customer;
             })
             ->sortByDesc('total_profit');
@@ -97,6 +98,7 @@ class UserService
             ->get()
             ->map(function ($customer) {
                 $customer->avg_profit = $customer->orders->avg('ppl_profit');
+                $customer->total_orders = $customer->orders->count();
                 return $customer;
             })
             ->sortByDesc('avg_profit');

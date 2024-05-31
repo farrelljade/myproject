@@ -65,9 +65,18 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Sales Rep:</strong> {{ $customer->user->first_name }} {{ $customer->user->last_name }}
-                            </td>
+                            @if (Auth::user()->id === $customer->user_id || Auth::user()->is_admin)
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                    <strong>Sales Rep:</strong> 
+                                    <a href="{{ route('users.show', $customer->user_id) }}" class="text-blue-600 hover:text-blue-900">
+                                        {{ $customer->user->first_name }} {{ $customer->user->last_name }}
+                                    </a>
+                                </td>
+                            @else
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                                    <strong>Sales Rep:</strong> {{ $customer->user->first_name }} {{ $customer->user->last_name }}
+                                </td>
+                            @endif
                         </tr>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
@@ -86,7 +95,7 @@
     </div>
 
     <div class="flex flex-row mt-8 space-x-4">
-        <div class="flex-1 overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="flex-2 overflow-x-auto shadow-md sm:rounded-lg">
             <div class="inline-block min-w-full align-middle">          
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -112,7 +121,7 @@
                                 {{ number_format($totalQuantity) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                £{{ $totalSpent }}
+                                £{{ number_format($totalSpent, 2) }}
                             </td>
                         </tr>
                     </tbody>
@@ -133,6 +142,12 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Total Kerosene
                             </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total Gas Oil
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total AdBlue
+                            </th>
                         </tr>
                     </thead>
           
@@ -146,6 +161,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 £{{ number_format($totalKero, 2) }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                £{{ number_format($totalRed, 2) }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                £{{ number_format($totalAdblue, 2) }}
                             </td>
                         </tr>
                     </tbody>

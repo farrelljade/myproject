@@ -35,7 +35,8 @@ class CustomerController extends Controller
 
     public function index(Request $request): View | RedirectResponse
     {
-        $query = Customer::query();
+        // $query = Customer::query();
+        $query = Customer::with('user');
 
         // Filter by company name
         if ($name = $request->input('customer_search')) {
@@ -121,6 +122,8 @@ class CustomerController extends Controller
         $totalDerv = $this->customerService->getCustomerProductTotal($customer->id, 'DERV');
         $totalIho = $this->customerService->getCustomerProductTotal($customer->id, 'IHO');
         $totalKero = $this->customerService->getCustomerProductTotal($customer->id, 'Kerosene');
+        $totalRed = $this->customerService->getCustomerProductTotal($customer->id, 'Gas Oil');
+        $totalAdblue = $this->customerService->getCustomerProductTotal($customer->id, 'AdBlue');
 
         return view('customers.show', [
             'totalQuantity' => $totalQuantity,
@@ -130,7 +133,9 @@ class CustomerController extends Controller
             'allOrders' => $allOrders,
             'totalDerv' => $totalDerv,
             'totalIho' => $totalIho,
-            'totalKero' => $totalKero
+            'totalKero' => $totalKero,
+            'totalRed' => $totalRed,
+            'totalAdblue' => $totalAdblue,
         ]);
     }
 }

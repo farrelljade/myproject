@@ -80,11 +80,13 @@ class UserController extends Controller
     {
         $customersProfit = $this->userService->getCustomerProfitList($id);
         $customersAvg = $this->userService->getCustomerAvgProfitList($id);
+        $customerOrders = $this->customerService->getCustomerTotalOrders($id);
 
 
         return view('users.profit', [
             'customersProfit' => $customersProfit,
-            'customersAvg' => $customersAvg
+            'customersAvg' => $customersAvg,
+            'customerOrders' => $customerOrders
         ]);
     }
 }
