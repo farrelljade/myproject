@@ -43,7 +43,7 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
-                                <strong>Customers:</strong><a href="{{ route('users.customers', $user) }}" class="text-sm font-medium text-green-600 hover:text-green-900"> {{ $totalCustomers }}</a>
+                                <strong>Customers:</strong><a href="{{ route('users.customers', $user) }}" class="text-sm font-medium text-blue-600 hover:text-blue-900"> {{ $totalCustomers }}</a>
                             </td>
                         </tr>
                         <tr>

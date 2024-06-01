@@ -72,6 +72,19 @@ class UserService
         });
     }
 
+    // Get 10 most recent users orders
+    public function getRecentOrders($id)
+    {
+        $user = $this->user->findOrFail($id);
+
+        return $user->customers()
+            ->join('orders', 'customers.id', '=', 'orders.customer_id')
+            ->select('orders.*', 'customers.name as customer_name')
+            ->orderBy('orders.created_at', 'desc')
+            ->take(10)
+            ->get();
+    }
+
     // Get list of customers by profit
     public function getCustomerProfitList($id)
     {

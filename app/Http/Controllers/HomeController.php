@@ -3,23 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function index(): View
     {
+        // Get recent orders for logged in user
+        $userId = Auth::id();
+        $recentOrders = $this->userService->getRecentOrders($userId);
+
         // Query 2 DB's in order to retrieve data
         $orders = DB::table('orders')
                     ->join('customers', 'orders.customer_id', '=', 'customers.id')
                     ->select('orders.*', 'customers.name', 'customers.email', 'customers.address', 'customers.number')
-                    ->latest()->get();
-
-        // $users = DB::table('customers')
-        //             ->join('orders', 'customers.id', '=', 'orders.customer_id')
-        //             ->select('customers.*', 'orders.total_cost')
-        //             ->latest()->get();
+                    ->latest()
+                    ->get();
 
         // Calculate total orders for each users customers
         $users = DB::table('users')
@@ -39,7 +48,9 @@ class HomeController extends Controller
 
         return view('home', [
             'orders' => $orders,
-            'users' => $users
+            'users' => $users,
+            'recentOrders' => $recentOrders
         ]);
+
     }
 }

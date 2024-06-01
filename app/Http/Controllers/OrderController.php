@@ -94,7 +94,9 @@ class OrderController extends Controller
         $validated = $request->validated();
         Order::create($validated);
 
-        return redirect()->back()->with('success', 'Order created successfully');
+        // return redirect()->back()->with('success', 'Order created successfully');
+        return redirect()->route('customers.show', $request->customer_id)
+                         ->with('success', 'Order created successfully');
     }
 
     public function edit($id)
