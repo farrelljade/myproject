@@ -4,7 +4,7 @@
     </x-slot:heading>
 
     <form action="{{ route('customers.index')}}" method="get" class="mb-4">
-        <div class="grid gap-6 mb-6 md:grid-cols-3">
+        <div class="grid gap-6 mb-6 md:grid-cols-4">
             <div>
                 <label for="customer_search" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Search Customer</label>
                 <input type="text" id="customer_search" name="customer_search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search Customer">
@@ -87,14 +87,14 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <script>
-  $(function() {
-      $("#customer_search").autocomplete({
-          source: "{{ url('api/customers/search') }}",
-          minLength: 2,
-          select: function(event, ui) {
-              $('#customer_search').val(ui.item.value);
-              $('#customer_id').val(ui.item.id);
-          }
-      });
-  });
-  </script>
+    $(function() {
+        $("#customer_search").autocomplete({
+            source: "{{ url('api/customers/search') }}",
+            minLength: 2,
+            select: function(event, ui) {
+                $('#customer_search').val(ui.item.value);
+                $('#customer_id').val(ui.item.id);
+            }
+        });
+    });
+</script>

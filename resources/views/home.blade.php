@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Hi, {{ Auth::user()->first_name}}
+        Hi, {{ Auth::user()->first_name }}
     </x-slot:heading>
 
     <div class="flex flex-row justify-center mt-8 space-x-8">
@@ -19,7 +19,14 @@
                                 Total
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Time
+                                <a href="{{ route('home', ['sort' => request('sort') === 'asc' ? 'desc' : 'asc']) }}">
+                                    Time
+                                    @if(request('sort') === 'asc')
+                                        &#9650; {{-- Up arrow for ascending --}}
+                                    @else
+                                        &#9660; {{-- Down arrow for descending --}}
+                                    @endif
+                                </a>
                             </th>
                         </tr>
                     </thead>
@@ -28,7 +35,7 @@
                         @foreach ($recentOrders as $order)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-900">
-                                <a href="{{ route('customers.show', $order->customer_id) }}">{{ $order->customer_name }}</a>              
+                                <a href="{{ route('customers.show', $order->customer_id) }}">{{ $order->customer_name }}</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $order->product_name }}
@@ -46,5 +53,4 @@
             </div>
         </div>
     </div>
-    
 </x-layout>

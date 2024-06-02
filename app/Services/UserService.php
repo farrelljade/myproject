@@ -73,20 +73,20 @@ class UserService
     }
 
     // Get 10 most recent users orders
-    public function getRecentOrders($id)
+    public function getRecentOrders($id, $sortOrder = 'desc')
     {
         $user = $this->user->findOrFail($id);
 
         return $user->customers()
             ->join('orders', 'customers.id', '=', 'orders.customer_id')
             ->select('orders.*', 'customers.name as customer_name')
-            ->orderBy('orders.created_at', 'desc')
+            ->orderBy('orders.created_at', $sortOrder)
             ->take(10)
             ->get();
     }
 
     // Get list of customers by profit
-    public function getCustomerProfitList($id)
+    public function getCustomerProfitList($id, $sortOrder = 'total_profit_desc')
     {
         $user = $this->user->findOrFail($id);
         $customers = $user->customers()
@@ -98,6 +98,16 @@ class UserService
                 return $customer;
             })
             ->sortByDesc('total_profit');
+
+        if ($sortOrder === 'total_orders_asc') {
+            $customers = $customers->sortBy('total_orders');
+        } elseif ($sortOrder === 'total_orders_desc') {
+            $customers = $customers->sortByDesc('total_orders');
+        } elseif ($sortOrder === 'total_profit_asc') {
+            $customers = $customers->sortBy('total_profit');
+        } elseif ($sortOrder === 'total_profit_desc') {
+            $customers = $customers->sortByDesc('total_profit');
+        }
 
         return $customers;
     }

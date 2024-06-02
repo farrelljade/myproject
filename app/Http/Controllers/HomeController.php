@@ -21,7 +21,10 @@ class HomeController extends Controller
     {
         // Get recent orders for logged in user
         $userId = Auth::id();
-        $recentOrders = $this->userService->getRecentOrders($userId);
+
+        // Sort order from the query parameters
+        $sortOrder = request('sort', 'desc');
+        $recentOrders = $this->userService->getRecentOrders($userId, $sortOrder);
 
         // Query 2 DB's in order to retrieve data
         $orders = DB::table('orders')

@@ -3,7 +3,7 @@
         Profit Report
     </x-slot:heading>
 
-    <div class="flex flex-row justify-center mt-8 space-x-8">
+    <div class="flex flex-row justify-center mt-8 space-x-4">
         <div class="w-1/2 overflow-x-auto shadow-md sm:rounded-lg">
             <div class="inline-block min-w-full align-middle">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -16,10 +16,24 @@
                                 Company Name
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Total Orders
+                                <a href="{{ route('users.profit', ['id' => $user->id, 'sort' => request('sort') === 'total_orders_asc' ? 'total_orders_desc' : 'total_orders_asc']) }}">
+                                    Total Orders
+                                    @if(request('sort') === 'total_orders_asc')
+                                        &#9650; {{-- Up arrow for ascending --}}
+                                    @else
+                                        &#9660; {{-- Down arrow for descending --}}
+                                    @endif
+                                </a>
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Total Profit
+                                <a href="{{ route('users.profit', ['id' => $user->id, 'sort' => request('sort') === 'total_profit_asc' ? 'total_profit_desc' : 'total_profit_asc']) }}">
+                                    Total Profit
+                                    @if(request('sort') === 'total_profit_asc')
+                                        &#9650; {{-- Up arrow for ascending --}}
+                                    @else
+                                        &#9660; {{-- Down arrow for descending --}}
+                                    @endif
+                                </a>
                             </th>
                         </tr>
                     </thead>

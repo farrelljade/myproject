@@ -78,12 +78,14 @@ class UserController extends Controller
 
     public function getUserProfit($id): View
     {
-        $customersProfit = $this->userService->getCustomerProfitList($id);
+        $sortOrder = request('sort', 'total_profit_desc');
+        $customersProfit = $this->userService->getCustomerProfitList($id, $sortOrder);
         $customersAvg = $this->userService->getCustomerAvgProfitList($id);
         $customerOrders = $this->customerService->getCustomerTotalOrders($id);
 
 
         return view('users.profit', [
+            'user' => User::findOrFail($id),
             'customersProfit' => $customersProfit,
             'customersAvg' => $customersAvg,
             'customerOrders' => $customerOrders
