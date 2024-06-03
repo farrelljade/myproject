@@ -9,6 +9,14 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
+Route::get('test', function () {
+    \Illuminate\Support\Facades\Mail::to('farrellmikel@yahoo.com')->send(
+        new \App\Mail\CallBack()
+    );
+
+    return 'Callback sent!';
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home')
     ->middleware('auth');
 

@@ -9,7 +9,8 @@ use Illuminate\Contracts\View\View;
 
 class UserController extends Controller
 {
-    protected $userService, $customerService;
+    protected CustomerService $customerService;
+    protected UserService $userService;
 
     public function __construct(UserService $userService, CustomerService $customerService)
     {

@@ -3,14 +3,15 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
-    protected $user;
+    protected User $user;
 
     public function __construct(User $user)
     {
-        $this->user = $user;        
+        $this->user = $user;
     }
 
     public function getTotalCustomers($id)
@@ -35,7 +36,7 @@ class UserService
     public function getTotalSpent($id)
     {
         $user = $this->user->findOrFail($id);
-        return $user->customers()->with('orders')->get()->sum(function($customer) {
+        return $user->customers()->with('orders')->get()->sum(function ($customer) {
             return $customer->orders->sum('total_cost');
         });
     }
@@ -43,7 +44,7 @@ class UserService
     public function getTotalProfit($id)
     {
         $user = $this->user->findOrFail($id);
-        return $user->customers()->with('orders')->get()->sum(function($customer) {
+        return $user->customers()->with('orders')->get()->sum(function ($customer) {
             return $customer->orders->sum('profit');
         });
     }
@@ -52,24 +53,24 @@ class UserService
     public function getTotalProductSpent($id, $productName)
     {
         $user = $this->user->findOrFail($id);
-        return $user->customers()->with(['orders' => function($query) use ($productName) {
+        return $user->customers()->with(['orders' => function ($query) use ($productName) {
             $query->where('product_name', $productName);
         }])
-        ->get()->sum(function($customer) {
-            return $customer->orders->sum('total_cost');
-        });
+            ->get()->sum(function ($customer) {
+                return $customer->orders->sum('total_cost');
+            });
     }
 
     // Get a customers total orders on a specific product
     public function getTotalProductOrders($id, $productName)
     {
         $user = $this->user->findOrFail($id);
-        return $user->customers()->with(['orders' => function($query) use ($productName) {
+        return $user->customers()->with(['orders' => function ($query) use ($productName) {
             $query->where('product_name', $productName);
         }])
-        ->get()->sum(function($customer) {
-            return $customer->orders->count();
-        });
+            ->get()->sum(function ($customer) {
+                return $customer->orders->count();
+            });
     }
 
     // Get 10 most recent users orders
@@ -85,7 +86,7 @@ class UserService
             ->get();
     }
 
-    // Get list of customers by profit
+    // Get list of customers by profit and paginate by 5
     public function getCustomerProfitList($id, $sortOrder = 'total_profit_desc')
     {
         $user = $this->user->findOrFail($id);
@@ -96,21 +97,39 @@ class UserService
                 $customer->total_profit = $customer->orders->sum('profit');
                 $customer->total_orders = $customer->orders->count();
                 return $customer;
-            })
-            ->sortByDesc('total_profit');
+            });
 
-        if ($sortOrder === 'total_orders_asc') {
-            $customers = $customers->sortBy('total_orders');
-        } elseif ($sortOrder === 'total_orders_desc') {
-            $customers = $customers->sortByDesc('total_orders');
-        } elseif ($sortOrder === 'total_profit_asc') {
-            $customers = $customers->sortBy('total_profit');
-        } elseif ($sortOrder === 'total_profit_desc') {
-            $customers = $customers->sortByDesc('total_profit');
+        switch ($sortOrder) {
+            case 'total_orders_asc':
+                $customers = $customers->sortBy('total_orders');
+                break;
+            case 'total_orders_desc';
+                $customers = $customers->sortByDesc('total_orders');
+                break;
+            case 'total_profit_asc':
+                $customers = $customers->sortBy('total_profit');
+                break;
+            case 'total_profit_desc':
+                $customers = $customers->sortByDesc('total_profit');
+                break;
         }
 
-        return $customers;
+        // Create a paginator
+        $perPage = 10;
+        $page = request()->get('page', 1);
+        $offset = ($page - 1) * $perPage;
+
+        $paginatedCustomers = new LengthAwarePaginator(
+            $customers->slice($offset, $perPage),
+            $customers->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        return $paginatedCustomers;
     }
+
 
     // Get list of customers by Avg. profit
     public function getCustomerAvgProfitList($id)
@@ -123,8 +142,7 @@ class UserService
                 $customer->avg_profit = $customer->orders->avg('ppl_profit');
                 $customer->total_orders = $customer->orders->count();
                 return $customer;
-            })
-            ->sortByDesc('avg_profit');
+            });
 
         return $customers;
     }
